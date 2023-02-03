@@ -44,7 +44,3 @@ app.*.map.json
 /android/app/release
 
 
-unitrail/unity/UniTrailAR/Builds/
-unitrail/unity/UniTrailAR/Library/
-unitrail/unity/UniTrailAR/Temp/
-unitrail/unity/UniTrailAR/Logs/
