@@ -1,15 +1,24 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 
-class Home extends  StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:namer_app/views/Homescreen.dart';
+import 'package:namer_app/views/Widgets/UniButton.dart';
+
+class Welcome extends  StatelessWidget {
   
   @override
   Widget build(BuildContext context){
     return Stack(
       children: [
+        Scaffold(
+          appBar: AppBar(
+            title: Image.asset('assets/images/logo.png',fit: BoxFit.cover),
+          ),
+        ),
         Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/Tiv.jpg'),
+            image: AssetImage('assets/images/Tiv.jpeg'),
             fit:  BoxFit.cover
             )
         )
@@ -19,21 +28,22 @@ class Home extends  StatelessWidget {
           
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
-             Container(  
-                margin: EdgeInsets.all(2),  
-                child: ElevatedButton(  
-                  child: Text('Login!', style: TextStyle(fontSize: 20.0),),  
-                  onPressed: () {},  
-                ),  
-             ),
-             Container(
-              margin: EdgeInsets.all(2),
-              child: ElevatedButton(
-                child: Text('Guest!', style: TextStyle(fontSize: 20.0),),  
-                  onPressed: () {},  
-              )
-              ),
-            
+            UniBotton(title: 'Sign in', color: Color.fromARGB(255, 129, 22, 14)
+            , onPressed: (){}),
+            SizedBox(height: 10,),
+            UniBotton(title: 'Guest', 
+              color: Color.fromARGB(255, 129, 22, 14), 
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const HomeScreen();
+                    }
+                  )
+                );
+              }
+            ),
           ],
         ),
       )

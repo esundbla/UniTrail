@@ -1,7 +1,7 @@
 
 import 'dart:ffi';
 import 'dart:math';
-import 'views/Home.dart';
+import 'views/Welcome.dart';
 
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return MaterialApp(
-      home: Home(),      
+      home: Welcome(),      
     );
   }   
 }
