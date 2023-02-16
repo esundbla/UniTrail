@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class UniBotton extends StatelessWidget{
+class SignInButton extends StatelessWidget {
   final String title;
   final Color color;
   final void Function()? onPressed;
 
-  UniBotton({required this.title, required this.color, required this.onPressed});
+  SignInButton({required this.title, required this.color, required this.onPressed});
 
   @override
-  Widget build(BuildContext context){
-    return ElevatedButton(
-      onPressed: onPressed,
-     child: Container(padding: const EdgeInsets.symmetric(horizontal: 25.0),
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: Container(
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(

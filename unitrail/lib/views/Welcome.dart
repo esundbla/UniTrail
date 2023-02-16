@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:namer_app/views/Homescreen.dart';
+import 'package:namer_app/views/LoginPage.dart';
+import 'package:namer_app/views/Widgets/SignInButton.dart';
 import 'package:namer_app/views/Widgets/UniButton.dart';
 
 class Welcome extends  StatelessWidget {
@@ -28,11 +30,21 @@ class Welcome extends  StatelessWidget {
           
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
-            UniBotton(title: 'Sign in', color: Color.fromARGB(255, 129, 22, 14)
-            , onPressed: (){}),
+            SignInButton(title: 'Sign in', color: Colors.white,
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginPage();
+                    }
+                  )
+                );
+              }
+            ),
             SizedBox(height: 10,),
-            UniBotton(title: 'Guest', 
-              color: Color.fromARGB(255, 129, 22, 14), 
+            SignInButton(title: 'Guest',
+              color: Colors.white,
               onPressed: () {
                 Navigator.push(
                   context,

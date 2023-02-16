@@ -19,7 +19,7 @@ class _ARDebugState extends State<ARDebug>{
         child: Center(
           child: GestureDetector(
             onTap: (){
-              print("AR");
+              print("Estoy aqui!");
             },
             child: Container(
               height: 50,
