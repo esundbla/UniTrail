@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'UniTrail',
       theme: ThemeData(
+
         primarySwatch: Colors.blue,
+
       ),
       home: const BackendTesting(),
     );
