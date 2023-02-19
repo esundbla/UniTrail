@@ -41,7 +41,7 @@ class Scene extends StatelessWidget {
                         width: 34 * fem,
                         height: 29 * fem,
                         child: Image.asset(
-                          'assets/images/vector-zG8.png',
+                          'assets/images/vector-home.png',
                           width: 34 * fem,
                           height: 29 * fem,
                         ),
@@ -55,7 +55,7 @@ class Scene extends StatelessWidget {
                     width: 201 * fem,
                     height: 43 * fem,
                     child: Image.asset(
-                      'assets/images/logodraftdarkmode2x-2.png',
+                      'assets/images/final_text_with_logo2x.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -69,7 +69,7 @@ class Scene extends StatelessWidget {
                       width: 35 * fem,
                       height: 35 * fem,
                       child: Image.asset(
-                        'assets/images/user-circle-69n.png',
+                        'assets/images/user-circle.png',
                         width: 35 * fem,
                         height: 35 * fem,
                       ),
@@ -85,8 +85,8 @@ class Scene extends StatelessWidget {
                   EdgeInsets.fromLTRB(17 * fem, 7 * fem, 21 * fem, 19 * fem),
               width: 241 * fem,
               decoration: BoxDecoration(
-                border: Border.all(color: Color(0xffa31621)),
-                color: Color(0xffa31621),
+                border: Border.all(color: const Color(0xffa31621)),
+                color: const Color(0xffa31621),
                 borderRadius: BorderRadius.circular(10 * fem),
               ),
               child: Column(
@@ -108,11 +108,11 @@ class Scene extends StatelessWidget {
                           padding: EdgeInsets.fromLTRB(
                               6 * fem, 5 * fem, 6 * fem, 4 * fem),
                           height: double.infinity,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.cover,
                               image: AssetImage(
-                                'assets/images/ellipse-1.png',
+                                'assets/images/ellipse.png',
                               ),
                             ),
                           ),
@@ -122,7 +122,7 @@ class Scene extends StatelessWidget {
                               width: 37 * fem,
                               height: 37 * fem,
                               child: Image.asset(
-                                'assets/images/icons8-customer-96-xxhdpi-4.png',
+                                'assets/images/icon-user.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -139,7 +139,7 @@ class Scene extends StatelessWidget {
                               fontSize: 14 * ffem,
                               fontWeight: FontWeight.w400,
                               height: 1.2125 * ffem / fem,
-                              color: Color(0xffffffff),
+                              color: const Color(0xffffffff),
                             ),
                           ),
                         ),
@@ -157,7 +157,7 @@ class Scene extends StatelessWidget {
                         fontSize: 14 * ffem,
                         fontWeight: FontWeight.w400,
                         height: 1.2125 * ffem / fem,
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                     ),
                   ),
@@ -172,7 +172,7 @@ class Scene extends StatelessWidget {
                         fontSize: 14 * ffem,
                         fontWeight: FontWeight.w400,
                         height: 1.2125 * ffem / fem,
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                     ),
                   ),
@@ -185,8 +185,8 @@ class Scene extends StatelessWidget {
                   EdgeInsets.fromLTRB(18 * fem, 11 * fem, 22 * fem, 8 * fem),
               width: 360 * fem,
               decoration: BoxDecoration(
-                border: Border.all(color: Color(0xffa31621)),
-                color: Color(0xff78c091),
+                border: Border.all(color: const Color(0xffa31621)),
+                color: const Color(0xff78c091),
                 borderRadius: BorderRadius.circular(15 * fem),
               ),
               child: Row(
@@ -203,7 +203,7 @@ class Scene extends StatelessWidget {
                         fontSize: 20 * ffem,
                         fontWeight: FontWeight.w400,
                         height: 1.2125 * ffem / fem,
-                        color: Color(0xff000000),
+                        color: const Color(0xff000000),
                       ),
                     ),
                   ),
@@ -218,7 +218,7 @@ class Scene extends StatelessWidget {
                         fontSize: 20 * ffem,
                         fontWeight: FontWeight.w400,
                         height: 1.2125 * ffem / fem,
-                        color: Color(0xff000000),
+                        color: const Color(0xff000000),
                       ),
                     ),
                   ),
@@ -232,7 +232,7 @@ class Scene extends StatelessWidget {
                       width: 26 * fem,
                       height: 30 * fem,
                       child: Image.asset(
-                        'assets/images/arrow-up-svgrepo-com-2-5pt.png',
+                        'assets/images/arrow-up.png',
                         width: 26 * fem,
                         height: 30 * fem,
                       ),

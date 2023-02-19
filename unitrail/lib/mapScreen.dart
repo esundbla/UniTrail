@@ -41,7 +41,7 @@ class Scene extends StatelessWidget {
                         width: 34 * fem,
                         height: 29 * fem,
                         child: Image.asset(
-                          'assets/images/vector-HQk.png',
+                          'assets/images/vector-home.png',
                           width: 34 * fem,
                           height: 29 * fem,
                         ),
@@ -55,7 +55,7 @@ class Scene extends StatelessWidget {
                     width: 201 * fem,
                     height: 43 * fem,
                     child: Image.asset(
-                      'assets/images/logodraftdarkmode2x-3-j6p.png',
+                      'assets/images/final_text_with_logo2x.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -131,7 +131,7 @@ class Scene extends StatelessWidget {
                       width: 26 * fem,
                       height: 34.79 * fem,
                       child: Image.asset(
-                        'assets/images/arrow-up-svgrepo-com-1-GDE.png',
+                        'assets/images/arrow-down.png',
                         width: 26 * fem,
                         height: 34.79 * fem,
                       ),

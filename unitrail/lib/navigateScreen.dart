@@ -48,7 +48,7 @@ class Scene extends StatelessWidget {
                               width: 34 * fem,
                               height: 29 * fem,
                               child: Image.asset(
-                                'assets/images/vector-XxL.png',
+                                'assets/images/vector-home.png',
                                 width: 34 * fem,
                                 height: 29 * fem,
                               ),
@@ -62,7 +62,7 @@ class Scene extends StatelessWidget {
                           width: 201 * fem,
                           height: 43 * fem,
                           child: Image.asset(
-                            'assets/images/logodraftdarkmode2x-4.png',
+                            'assets/images/final_text_with_logo2x.png',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -76,7 +76,7 @@ class Scene extends StatelessWidget {
                             width: 35 * fem,
                             height: 35 * fem,
                             child: Image.asset(
-                              'assets/images/user-circle-Jmn.png',
+                              'assets/images/user-circle.png',
                               width: 35 * fem,
                               height: 35 * fem,
                             ),
@@ -144,7 +144,7 @@ class Scene extends StatelessWidget {
                                     width: 39 * fem,
                                     height: 38 * fem,
                                     child: Image.asset(
-                                      'assets/images/icons8-search-more-72-xxhdpi-1-5Rz.png',
+                                      'assets/images/icon-search.png',
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -232,7 +232,7 @@ class Scene extends StatelessWidget {
                                     width: 39 * fem,
                                     height: 38 * fem,
                                     child: Image.asset(
-                                      'assets/images/icons8-search-more-72-xxhdpi-2.png',
+                                      'assets/images/icon-search.png',
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -300,7 +300,7 @@ class Scene extends StatelessWidget {
                       width: 26 * fem,
                       height: 30 * fem,
                       child: Image.asset(
-                        'assets/images/arrow-up-svgrepo-com-3.png',
+                        'assets/images/arrow-up.png',
                         width: 26 * fem,
                         height: 30 * fem,
                       ),
