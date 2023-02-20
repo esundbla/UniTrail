@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unitrail/BackEndTesting/crud.dart';
 import 'package:unitrail/BackEndTesting/read%20data/get_room_number.dart';
 import 'components/rounded_button.dart';
+import 'components/CustomeSearchDelegate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BackendTesting extends StatefulWidget {
@@ -47,6 +48,23 @@ class _BackendTestingState extends State<BackendTesting> {
               ),
             ),
             SizedBox(height: size.height * 0.1),
+            RoundedButton(
+                text: "From",
+                press: () {
+                  FirebaseFirestore firestore = FirebaseFirestore.instance;
+                  var buildingsRef = firestore.collection("buildings");
+                  buildingsRef.get().then((QuerySnapshot snapshot) {
+                    snapshot.docs.forEach((doc) {
+                      print(doc["Document ID"]);
+                    });
+                  });
+                  showSearch(
+                      context: context,
+                      // delegate to customize the search bar
+                      delegate: CustomSearchDelegate(
+                          searchTerms: ["apple", "orange", "french fries"]));
+                }),
+            SizedBox(height: size.height * 0.5),
             RoundedButton(
               text: "CRUD",
               press: () {
