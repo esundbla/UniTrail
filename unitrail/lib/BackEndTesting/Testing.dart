@@ -11,7 +11,8 @@ class BackendTesting extends StatefulWidget {
 class _BackendTestingState extends State<BackendTesting> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size; // This provides the total width and height of our screen
+    Size size = MediaQuery.of(context)
+        .size; // This provides the total width and height of our screen
     return Scaffold(
       body: Center(
         child: Column(
@@ -36,4 +37,3 @@ class _BackendTestingState extends State<BackendTesting> {
     );
   }
 }
-
