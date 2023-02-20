@@ -3,7 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:namer_app/views/Homescreen.dart';
-import 'package:namer_app/views/Widgets/SignInButton.dart';
+import 'package:namer_app/views/SignUpPage.dart';
+import 'package:namer_app/views/Widgets/MyButton.dart';
 import 'package:namer_app/views/Components/Text_Field.dart';
 import 'package:namer_app/views/Components/Tile.dart';
 
@@ -39,8 +40,8 @@ class LoginPage extends StatelessWidget{
               
               children: [
                 Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [tile(imagePath: 'assets/images/logo.png'),],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [tile(imagePath: 'assets/images/Logo1.png'),],
                 ),
                 SizedBox(height: 20),
 
@@ -49,7 +50,7 @@ class LoginPage extends StatelessWidget{
                   // size: 300,
 
                 Text(
-                  '3D MAP',
+                  '->',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
@@ -68,18 +69,19 @@ class LoginPage extends StatelessWidget{
                     obscureText: true
                 ),
                 SizedBox(height: 10),
-                SignInButton(
-                  title: 'Sign In', 
+                MyButton(
+                  title: 'Login',
                   color: Colors.white, 
                   onPressed:() { 
-                    Navigator.push(
-                    context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                        return const HomeScreen();
-                    }
-                  )
-                );}),
+                    SignUserIn();
+                  //   Navigator.push(
+                  //   context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) {
+                  //       return const HomeScreen();
+                  //   }
+                  // )
+                }),
                 SizedBox(height: 5),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -96,19 +98,7 @@ class LoginPage extends StatelessWidget{
                 ),
 
                 SizedBox(height: 20),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Text(
-                //       ' Register now',
-                //       style: TextStyle(
-                //         color: Colors.blue,
-                //         fontWeight: FontWeight.bold,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: 20),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -133,16 +123,34 @@ class LoginPage extends StatelessWidget{
                     ],
                   ),
                 ),
-                 SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          tile(imagePath: 'assets/images/google.png'),
-                          SizedBox(width: 10),
-                          tile(imagePath: 'assets/images/facebook.png')
-                        
-                        ],
-                      )
+                SizedBox(height: 20),
+                IconButton(
+                  icon: const Icon(Icons.phone_android),
+
+                  tooltip: 'Sign up now!',
+                  iconSize: 20,
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignUpPage();
+                          }
+                        )
+                        );
+                      },
+                ),
+                // SizedBox(height: 10),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: const [
+                //
+                //     tile(imagePath: 'assets/images/google.png'),
+                //     SizedBox(width: 10),
+                //     tile(imagePath: 'assets/images/facebook.png')
+                //
+                //   ],
+                // )
 
               ],
 
