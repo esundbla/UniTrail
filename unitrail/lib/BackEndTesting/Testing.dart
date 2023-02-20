@@ -13,20 +13,33 @@ class BackendTesting extends StatefulWidget {
 }
 
 class _BackendTestingState extends State<BackendTesting> {
-  List<String> docIDs = [];
+  List<String> buildRooms = [];
 
-  Future getDocID() async {
-    await FirebaseFirestore.instance
-        .collection('Buildings')
-        .doc("AES")
-        .collection("Floors")
-        .get()
-        .then(
-          (value) => value.docs.forEach((element) {
-            print(element.reference);
-            docIDs.add(element.reference.id);
-          }),
-        );
+  readData() async {
+    CollectionReference buildings =
+        FirebaseFirestore.instance.collection("Buildings");
+
+    buildings.get().then((snapshot) {
+      snapshot.docs.forEach((building) {
+        print(building.id);
+        buildings.doc(building.id).collection("Floors").get().then((snap) {
+          snap.docs.forEach((floor) {
+            print(floor.id);
+            buildings
+                .doc(building.id)
+                .collection("Floors")
+                .doc(floor.id)
+                .get()
+                .then((rooms) {
+              rooms.data()?.keys.forEach((room) {
+                print(room);
+                buildRooms.add(building.id + room);
+              });
+            });
+          });
+        });
+      });
+    });
   }
 
   @override
@@ -50,59 +63,27 @@ class _BackendTestingState extends State<BackendTesting> {
             SizedBox(height: size.height * 0.1),
             RoundedButton(
                 text: "From",
-                press: () {
-                  FirebaseFirestore firestore = FirebaseFirestore.instance;
-                  var buildingsRef = firestore.collection("buildings");
-                  buildingsRef.get().then((QuerySnapshot snapshot) {
-                    snapshot.docs.forEach((doc) {
-                      print(doc["Document ID"]);
-                    });
-                  });
+                press: () async {
+                  await readData();
                   showSearch(
                       context: context,
                       // delegate to customize the search bar
-                      delegate: CustomSearchDelegate(
-                          searchTerms: ["apple", "orange", "french fries"]));
+                      delegate: CustomSearchDelegate(searchTerms: buildRooms));
                 }),
             SizedBox(height: size.height * 0.5),
             RoundedButton(
               text: "CRUD",
               press: () {
-                // DocumentReference buildings = FirebaseFirestore.instance
-                //     .collection("Buildings")
-                //     .doc("AES")
-                //     .collection("Floors")
-                //     .doc("2nd");
-                // buildings.get().then((snapshot) {
-                //   Map<String, dynamic> data =
-                //       snapshot.data() as Map<String, dynamic>;
-                //   print(data);
-                // });
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const Crud();
-                      },
-                    ),
-                  );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const Crud();
+                    },
+                  ),
+                );
               },
             ),
-            // Expanded(
-            //   child: FutureBuilder(
-            //     future: getDocID(),
-            //     builder: (context, snapshot) {
-            //       return ListView.builder(
-            //         itemCount: docIDs.length,
-            //         itemBuilder: (context, index) {
-            //           return ListTile(
-            //             title: GetRoomNumber(documentId: docIDs[index]),
-            //           );
-            //         },
-            //       );
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),
