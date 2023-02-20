@@ -21,10 +21,10 @@ class _BackendTestingState extends State<BackendTesting> {
 
     buildings.get().then((snapshot) {
       snapshot.docs.forEach((building) {
-        print(building.id);
+        //print(building.id);
         buildings.doc(building.id).collection("Floors").get().then((snap) {
           snap.docs.forEach((floor) {
-            print(floor.id);
+            //print(floor.id);
             buildings
                 .doc(building.id)
                 .collection("Floors")
@@ -32,7 +32,7 @@ class _BackendTestingState extends State<BackendTesting> {
                 .get()
                 .then((rooms) {
               rooms.data()?.keys.forEach((room) {
-                print(room);
+                //print(room);
                 buildRooms.add(building.id + room);
               });
             });
@@ -44,6 +44,7 @@ class _BackendTestingState extends State<BackendTesting> {
 
   @override
   Widget build(BuildContext context) {
+    readData();
     Size size = MediaQuery.of(context)
         .size; // This provides the total width and height of our screen
     return Scaffold(
@@ -63,8 +64,7 @@ class _BackendTestingState extends State<BackendTesting> {
             SizedBox(height: size.height * 0.1),
             RoundedButton(
                 text: "From",
-                press: () async {
-                  await readData();
+                press: ()  {
                   showSearch(
                       context: context,
                       // delegate to customize the search bar
