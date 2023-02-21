@@ -39,7 +39,7 @@ class _BackendTestingState extends State<BackendTesting> {
               data = await roomsnap.data();
             }
             for (var room in data.keys) {
-              print(room);
+              //print(room);
               var toAdd = await (DropdownMenuItem(
                 value: building.id + room,
                 child: Text(building.id + room),
@@ -71,7 +71,7 @@ class _BackendTestingState extends State<BackendTesting> {
               ),
             ),
             SizedBox(height: size.height * 0.1),
-            Text("Start Location"),
+            Text("Begining"),
             FutureBuilder(
                 future: readData(),
                 builder: (context,
@@ -79,8 +79,9 @@ class _BackendTestingState extends State<BackendTesting> {
                   if (snapshot.connectionState == ConnectionState.done &&
                       snapshot.hasData) {
                     var buildRooms = snapshot.data;
-                    print(buildRooms);
-                    return SearchChoices.single(
+                    //print(buildRooms);
+                    return 
+                    SearchChoices.single(
                       items: buildRooms,
                       value: start,
                       hint: "Select one",
@@ -104,7 +105,7 @@ class _BackendTestingState extends State<BackendTesting> {
                   if (snapshot.connectionState == ConnectionState.done &&
                       snapshot.hasData) {
                     var buildRooms = snapshot.data;
-                    print(buildRooms);
+                    //print(buildRooms);
                     return SearchChoices.single(
                       items: buildRooms,
                       value: dest,
@@ -132,6 +133,13 @@ class _BackendTestingState extends State<BackendTesting> {
                     },
                   ),
                 );
+              },
+            ),
+            RoundedButton(
+              text: "Navigate",
+              press: () {
+                print("Start: " + start);
+                print("Destination: " + dest);
               },
             ),
           ],
