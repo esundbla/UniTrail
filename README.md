@@ -1,4 +1,2 @@
 # UniTrail
 Senior experience project 
-
-
