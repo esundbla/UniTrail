@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unitrail/BackEndTesting/crud.dart';
-import 'package:unitrail/BackEndTesting/read%20data/get_room_number.dart';
 import 'components/rounded_button.dart';
-import 'components/CustomeSearchDelegate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:search_choices/search_choices.dart';
 
 class BackendTesting extends StatefulWidget {
   const BackendTesting({super.key});
@@ -13,7 +12,9 @@ class BackendTesting extends StatefulWidget {
 }
 
 class _BackendTestingState extends State<BackendTesting> {
-  List<String> buildRooms = [];
+  List<DropdownMenuItem<String>> buildRooms = [];
+  //List<String> buildRooms = [];
+  var selectedValue;
 
   readData() async {
     CollectionReference buildings =
@@ -21,10 +22,10 @@ class _BackendTestingState extends State<BackendTesting> {
 
     buildings.get().then((snapshot) {
       snapshot.docs.forEach((building) {
-        //print(building.id);
+        print(building.id);
         buildings.doc(building.id).collection("Floors").get().then((snap) {
           snap.docs.forEach((floor) {
-            //print(floor.id);
+            print(floor.id);
             buildings
                 .doc(building.id)
                 .collection("Floors")
@@ -32,8 +33,11 @@ class _BackendTestingState extends State<BackendTesting> {
                 .get()
                 .then((rooms) {
               rooms.data()?.keys.forEach((room) {
-                //print(room);
-                buildRooms.add(building.id + room);
+                print(room);
+                buildRooms.add(DropdownMenuItem(
+                      value: building.id + room,
+                      child: Text(building.id + room),
+                      ));
               });
             });
           });
@@ -43,7 +47,7 @@ class _BackendTestingState extends State<BackendTesting> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
     readData();
     Size size = MediaQuery.of(context)
         .size; // This provides the total width and height of our screen
@@ -62,14 +66,27 @@ class _BackendTestingState extends State<BackendTesting> {
               ),
             ),
             SizedBox(height: size.height * 0.1),
-            RoundedButton(
+            SearchChoices.single(
+              items: buildRooms,
+              value: selectedValue,
+              hint: "Select one",
+              searchHint: "Select one",
+              onChanged: (value) {
+                setState(() {
+                  selectedValue = value;
+                });
+              },
+              isExpanded: true,
+            ),
+
+            /*RoundedButton(
                 text: "From",
                 press: ()  {
                   showSearch(
                       context: context,
                       // delegate to customize the search bar
                       delegate: CustomSearchDelegate(searchTerms: buildRooms));
-                }),
+                }),*/
             SizedBox(height: size.height * 0.5),
             RoundedButton(
               text: "CRUD",
