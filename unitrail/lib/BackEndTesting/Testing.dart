@@ -12,43 +12,48 @@ class BackendTesting extends StatefulWidget {
 }
 
 class _BackendTestingState extends State<BackendTesting> {
-  List<DropdownMenuItem<String>> buildRooms = [];
   //List<String> buildRooms = [];
-  var selectedValue;
+  var start;
+  var dest;
 
-  readData() async {
-    CollectionReference buildings =
-        FirebaseFirestore.instance.collection("Buildings");
-
-    buildings.get().then((snapshot) {
-      snapshot.docs.forEach((building) {
-        print(building.id);
-        buildings.doc(building.id).collection("Floors").get().then((snap) {
-          snap.docs.forEach((floor) {
-            print(floor.id);
-            buildings
+  @override
+  Widget build(BuildContext context) {
+    Future<List<DropdownMenuItem<String>>> readData() async {
+      CollectionReference buildings =
+          FirebaseFirestore.instance.collection("Buildings");
+      Future<List<DropdownMenuItem<String>>> db_call() async {
+        var buildSnap = await buildings.get();
+        List<DropdownMenuItem<String>> buildRooms = [];
+        for (var building in buildSnap.docs) {
+          var floorsnap =
+              await buildings.doc(building.id).collection("Floors").get();
+          for (var floor in floorsnap.docs) {
+            //print(floor.id);
+            var roomsnap = await buildings
                 .doc(building.id)
                 .collection("Floors")
                 .doc(floor.id)
-                .get()
-                .then((rooms) {
-              rooms.data()?.keys.forEach((room) {
-                print(room);
-                buildRooms.add(DropdownMenuItem(
-                      value: building.id + room,
-                      child: Text(building.id + room),
-                      ));
-              });
-            });
-          });
-        });
-      });
-    });
-  }
+                .get();
+            var data;
+            if (roomsnap.exists) {
+              data = await roomsnap.data();
+            }
+            for (var room in data.keys) {
+              print(room);
+              var toAdd = await (DropdownMenuItem(
+                value: building.id + room,
+                child: Text(building.id + room),
+              ));
+              buildRooms.add(toAdd);
+            }
+          }
+        }
+        return buildRooms;
+      }
 
-  @override
-  Widget build(BuildContext context)  {
-    readData();
+      return await db_call();
+    }
+
     Size size = MediaQuery.of(context)
         .size; // This provides the total width and height of our screen
     return Scaffold(
@@ -66,28 +71,56 @@ class _BackendTestingState extends State<BackendTesting> {
               ),
             ),
             SizedBox(height: size.height * 0.1),
-            SearchChoices.single(
-              items: buildRooms,
-              value: selectedValue,
-              hint: "Select one",
-              searchHint: "Select one",
-              onChanged: (value) {
-                setState(() {
-                  selectedValue = value;
-                });
-              },
-              isExpanded: true,
-            ),
-
-            /*RoundedButton(
-                text: "From",
-                press: ()  {
-                  showSearch(
-                      context: context,
-                      // delegate to customize the search bar
-                      delegate: CustomSearchDelegate(searchTerms: buildRooms));
-                }),*/
-            SizedBox(height: size.height * 0.5),
+            Text("Start Location"),
+            FutureBuilder(
+                future: readData(),
+                builder: (context,
+                    AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.hasData) {
+                    var buildRooms = snapshot.data;
+                    print(buildRooms);
+                    return SearchChoices.single(
+                      items: buildRooms,
+                      value: start,
+                      hint: "Select one",
+                      searchHint: "Select one",
+                      onChanged: (value) {
+                        setState(() {
+                          start = value;
+                        });
+                      },
+                      isExpanded: true,
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }),
+            Text("Destination"),
+            FutureBuilder(
+                future: readData(),
+                builder: (context,
+                    AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.hasData) {
+                    var buildRooms = snapshot.data;
+                    print(buildRooms);
+                    return SearchChoices.single(
+                      items: buildRooms,
+                      value: dest,
+                      hint: "Select one",
+                      searchHint: "Select one",
+                      onChanged: (value) {
+                        setState(() {
+                          dest = value;
+                        });
+                      },
+                      isExpanded: true,
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }),
             RoundedButton(
               text: "CRUD",
               press: () {
