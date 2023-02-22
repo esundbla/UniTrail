@@ -23,7 +23,9 @@ class SignUpPage extends StatelessWidget{
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage('assets/images/Tiv.jpg'),
-            fit: BoxFit.cover
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
+            //colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
         ),
 
       ),
@@ -38,19 +40,21 @@ class SignUpPage extends StatelessWidget{
           Text_field(
               controller: firstNameController,
               hintText: 'First Name',
-              obscureText: false
+              obscureText: false,
+              icon: Icon(Icons.person)
           ),
-          Divider(height: 10),
+          //Divider(height: 2),
           Text_field(
               controller: lastNameController,
               hintText: 'Last Name',
-              obscureText: false
-          ),
-          Divider(height: 10),
+              obscureText: false,
+              icon: Icon(Icons.person)          ),
+          //Divider(height: 2),
           Text_field(
-              controller: passwordController,
-              hintText: 'Enter Password',
-              obscureText: false
+            controller: passwordController,
+            hintText: 'Enter Password',
+            obscureText: false,
+            icon: Icon(Icons.password),
           ),
           MyButton(
               title: 'Sign Up',

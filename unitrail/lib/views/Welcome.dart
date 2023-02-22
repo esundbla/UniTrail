@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:namer_app/views/Homescreen.dart';
+//import 'package:namer_app/views/Homescreen.dart';
 import 'package:namer_app/views/LoginPage.dart';
+import 'package:namer_app/views/SignUpPage.dart';
 import 'package:namer_app/views/Widgets/MyButton.dart';
 import 'package:namer_app/views/Widgets/UniButton.dart';
 
@@ -11,9 +12,11 @@ class home extends StatelessWidget{
   Widget build(BuildContext context){
     return DecoratedBox(
         decoration: BoxDecoration(
+
           image: DecorationImage(
             image: AssetImage('assets/images/Tiv.jpg'),
-            fit: BoxFit.cover
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
           ),
 
         ),
@@ -44,16 +47,31 @@ class home extends StatelessWidget{
               title: 'Guest',
               color: Colors.white,
             onPressed: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) {
-                        return HomeScreen();
-                      }
-                  )
-              );
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) {
+              //           return homescreen();
+              //         }
+              //     )
+              // )
             },
-          )
+          ),
+          Divider(height: 10),
+          MyButton(
+              title: 'Register',
+              color: Colors.white,
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) {
+                          return SignUpPage();
+                        }
+                    )
+                );
+              }
+          ),
         ],
       ),
     );
