@@ -48,14 +48,23 @@ class homeScreen extends StatelessWidget {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: const Text("My Classes"),
+                        shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                                color: Color(0xFFa31621), width: 5),
+                            borderRadius: BorderRadius.circular(20.0)),
                         content: const Text(""),
                         actions: [
-                          MaterialButton(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
+                          ElevatedButton(
+                              // ignore: sort_child_properties_last
+                              child: const Text("Ok"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xff78c091),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20)))),
                         ],
                       );
                     },
@@ -67,6 +76,10 @@ class homeScreen extends StatelessWidget {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: const Text("Search Classrooms"),
+                        shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                                color: Color(0xFFa31621), width: 5),
+                            borderRadius: BorderRadius.circular(20.0)),
                         content: const TextField(
                           obscureText: true,
                           decoration: InputDecoration(
@@ -75,12 +88,17 @@ class homeScreen extends StatelessWidget {
                           ),
                         ),
                         actions: [
-                          MaterialButton(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
+                          ElevatedButton(
+                              // ignore: sort_child_properties_last
+                              child: const Text("Add to My Classes"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xff78c091),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20)))),
                         ],
                       );
                     },
@@ -91,30 +109,56 @@ class homeScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text("Navigate"),
-                        actions: [
-                          const TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Current Location",
+                          title: const Text("Navigate"),
+                          actionsAlignment: MainAxisAlignment.center,
+                          shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Color(0xFFa31621), width: 5),
+                              borderRadius: BorderRadius.circular(20.0)),
+                          actions: [
+                            const TextField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: "Current Location",
+                              ),
                             ),
-                          ),
-                          const TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Destination",
+                            const TextField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: "Destination",
+                              ),
                             ),
-                          ),
-                          MaterialButton(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
+                            ButtonBar(
+                              children: [
+                                ElevatedButton(
+                                    // ignore: sort_child_properties_last
+                                    child: const Text("Cancel"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xFFa31621),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)))),
+                                ElevatedButton(
+                                    // ignore: sort_child_properties_last
+                                    child: const Text("Go"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xff78c091),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)))),
+                              ],
+                            )
+                          ]);
                     },
                   );
                 }
