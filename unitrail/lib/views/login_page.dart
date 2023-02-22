@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:namer_app/views/Components/Text_Field.dart';
-import 'package:namer_app/views/Homescreen.dart';
-import 'package:namer_app/views/LoginPage.dart';
-import 'package:namer_app/views/Widgets/MyButton.dart';
-import 'package:namer_app/views/Widgets/UniButton.dart';
+import 'package:uni_trail/views/Components/text_field.dart';
+import 'package:uni_trail/views/Widgets/my_button.dart';
 
-import 'Components/Tile.dart';
+import 'Components/_tile.dart';
 
 class LoginPage extends StatelessWidget{
   final emailController = TextEditingController();
@@ -32,20 +29,20 @@ class LoginPage extends StatelessWidget{
           Divider(height: 60),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [tile(imagePath: 'assets/images/Logo1.png'),],
+            children: [Tile(imagePath: 'assets/images/Logo1.png'),],
           ),
           Divider(height: 200),
 
-          Text_field(
+          Textfield(
               controller: emailController,
               hintText: 'Email',
               obscureText: false,
               icon: Icon(Icons.email)          ),
           //Divider(height: 2),
-          Text_field(
+          Textfield(
             controller: passwordController,
             hintText: 'Enter Password',
-            obscureText: false,
+            obscureText: true,
             icon: Icon(Icons.password),
           ),
           MyButton(

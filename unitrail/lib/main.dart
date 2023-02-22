@@ -1,14 +1,5 @@
-
-import 'dart:ffi';
-import 'dart:math';
-import 'package:namer_app/views/Welcome.dart';
-
-import 'views/Welcome.dart';
-
-import 'package:english_words/english_words.dart';
+import 'package:uni_trail/views/_welcome.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -24,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return MaterialApp(
-      home: home(),
+      home: Welcome(),
     );
   }   
 }

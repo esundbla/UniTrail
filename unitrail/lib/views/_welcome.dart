@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-//import 'package:namer_app/views/Homescreen.dart';
-import 'package:namer_app/views/LoginPage.dart';
-import 'package:namer_app/views/SignUpPage.dart';
-import 'package:namer_app/views/Widgets/MyButton.dart';
-import 'package:namer_app/views/Widgets/UniButton.dart';
+import 'package:uni_trail/views/login_page.dart';
+import 'package:uni_trail/views/sign_up_page.dart';
+import 'package:uni_trail/views/Widgets/my_button.dart';
+import 'Components/_tile.dart';
 
-import 'Components/Tile.dart';
-
-class home extends StatelessWidget{
+class Welcome extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return DecoratedBox(
@@ -25,9 +22,23 @@ class home extends StatelessWidget{
           Divider(height: 60),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [tile(imagePath: 'assets/images/Logo1.png'),],
+            children: [Tile(imagePath: 'assets/images/Logo1.png'),],
           ),
-          Divider(height: 400),
+          Divider(height: 300),
+          Text(
+            "Welcome!",
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            style:  TextStyle(
+              
+              decoration: TextDecoration.none,
+              color: Color(0xFFFCF7F8),
+              fontWeight: FontWeight.bold, 
+              fontSize: 40
+              ),
+        
+          ),
+          Divider(height: 100),
           MyButton(
               title: 'Login',
               color: Colors.white,
@@ -51,7 +62,7 @@ class home extends StatelessWidget{
               //     context,
               //     MaterialPageRoute(
               //         builder: (context) {
-              //           return homescreen();
+              //           return Homescreen();
               //         }
               //     )
               // )

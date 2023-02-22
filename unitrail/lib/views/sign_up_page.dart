@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:namer_app/views/Components/Text_Field.dart';
-import 'package:namer_app/views/Homescreen.dart';
-import 'package:namer_app/views/LoginPage.dart';
-import 'package:namer_app/views/Widgets/MyButton.dart';
-import 'package:namer_app/views/Widgets/UniButton.dart';
+import 'package:uni_trail/views/Components/text_field.dart';
+import 'package:uni_trail/views/Widgets/my_button.dart';
 
-import 'Components/Tile.dart';
+
+import 'Components/_tile.dart';
 
 class SignUpPage extends StatelessWidget{
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final passwordController = TextEditingController();
+  final emailController = TextEditingController();
 
   void saveInformation(){
     print(firstNameController.text);
@@ -34,23 +33,29 @@ class SignUpPage extends StatelessWidget{
           Divider(height: 60),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [tile(imagePath: 'assets/images/Logo1.png'),],
+            children: [Tile(imagePath: 'assets/images/Logo1.png'),],
           ),
           Divider(height: 200),
-          Text_field(
+          Textfield(
               controller: firstNameController,
               hintText: 'First Name',
               obscureText: false,
               icon: Icon(Icons.person)
           ),
           //Divider(height: 2),
-          Text_field(
+          Textfield(
               controller: lastNameController,
               hintText: 'Last Name',
               obscureText: false,
               icon: Icon(Icons.person)          ),
           //Divider(height: 2),
-          Text_field(
+          Textfield(
+              controller: emailController,
+              hintText: 'Enter email',
+              obscureText: false,
+              icon: Icon(Icons.email)
+          ),
+          Textfield(
             controller: passwordController,
             hintText: 'Enter Password',
             obscureText: false,

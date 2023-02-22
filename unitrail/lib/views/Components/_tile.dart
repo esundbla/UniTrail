@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-class tile extends StatelessWidget{
+class Tile extends StatelessWidget{
   final String imagePath;
-  const tile({
+  const Tile({
     super.key,
     required this.imagePath  
   });
@@ -15,8 +15,8 @@ class tile extends StatelessWidget{
         borderRadius: BorderRadius.circular(12),
         color: Color.fromARGB(255, 153, 97, 93)
       ),
-      child: Image.asset(imagePath),
       height: 40,
+      child: Image.asset(imagePath),
     );
     // TODO: implement build
     //throw UnimplementedError();
