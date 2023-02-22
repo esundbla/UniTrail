@@ -12,21 +12,29 @@ class BackendTesting extends StatefulWidget {
 }
 
 class _BackendTestingState extends State<BackendTesting> {
-  //List<String> buildRooms = [];
-  var start;
+  
+  //Variables to hold responses to search_choices
+  var start;    
   var dest;
 
   @override
   Widget build(BuildContext context) {
+    
+    //readData() returns all buildings and all rooms currently stored in the database
     Future<List<DropdownMenuItem<String>>> readData() async {
       CollectionReference buildings =
           FirebaseFirestore.instance.collection("Buildings");
+          //Secondary function to assure async executiong
       Future<List<DropdownMenuItem<String>>> db_call() async {
+        //get list of buldings
         var buildSnap = await buildings.get();
+        //Buildrooms is the final list object we aggregate for the search_choice widget
         List<DropdownMenuItem<String>> buildRooms = [];
+        //For all buildings
         for (var building in buildSnap.docs) {
           var floorsnap =
               await buildings.doc(building.id).collection("Floors").get();
+          //For every floor on current building
           for (var floor in floorsnap.docs) {
             //print(floor.id);
             var roomsnap = await buildings
@@ -35,11 +43,13 @@ class _BackendTestingState extends State<BackendTesting> {
                 .doc(floor.id)
                 .get();
             var data;
+            //Null check room documents
             if (roomsnap.exists) {
               data = await roomsnap.data();
             }
+            //For every room on given floor
             for (var room in data.keys) {
-              //print(room);
+              //create dropDownMenuItem with string of "building" + "room #"
               var toAdd = await (DropdownMenuItem(
                 value: building.id + room,
                 child: Text(building.id + room),
@@ -48,9 +58,10 @@ class _BackendTestingState extends State<BackendTesting> {
             }
           }
         }
+        //First function return
         return buildRooms;
       }
-
+      //final async return call
       return await db_call();
     }
 
@@ -60,6 +71,8 @@ class _BackendTestingState extends State<BackendTesting> {
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          
+          //Widget list for given page. 
           children: <Widget>[
             SizedBox(height: size.height * 0.1),
             const Text(
@@ -70,8 +83,12 @@ class _BackendTestingState extends State<BackendTesting> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             SizedBox(height: size.height * 0.1),
+
             Text("Begining"),
+
+            //Future Builder for start location searchChoices
             FutureBuilder(
                 future: readData(),
                 builder: (context,
@@ -97,7 +114,10 @@ class _BackendTestingState extends State<BackendTesting> {
                     return const CircularProgressIndicator();
                   }
                 }),
+
             Text("Destination"),
+
+            //Future Builder for Destination Search choices
             FutureBuilder(
                 future: readData(),
                 builder: (context,
@@ -122,6 +142,8 @@ class _BackendTestingState extends State<BackendTesting> {
                     return const CircularProgressIndicator();
                   }
                 }),
+
+            //Crud testing button    
             RoundedButton(
               text: "CRUD",
               press: () {
@@ -135,6 +157,8 @@ class _BackendTestingState extends State<BackendTesting> {
                 );
               },
             ),
+
+            //Navigate testing button
             RoundedButton(
               text: "Navigate",
               press: () {
