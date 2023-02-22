@@ -1,132 +1,207 @@
+import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'dart:ui';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:unitrail/utils.dart';
+import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 
-class Scene extends StatelessWidget {
+class homeScreen extends StatelessWidget {
+  const homeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 360;
-    double fem = MediaQuery.of(context).size.width / baseWidth;
-    double ffem = fem * 0.97;
-    return Container(
-      width: double.infinity,
-      child: Container(
-        // sethhomenoaction3cL (24:13)
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              // autogroupxnvevJk (V55zipCq1JnJXe26y7XNVe)
-              margin: EdgeInsets.fromLTRB(
-                  19 * fem, 0 * fem, 19.55 * fem, 696 * fem),
-              width: double.infinity,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    // vectorzZW (154:118)
-                    margin: EdgeInsets.fromLTRB(
-                        0 * fem, 0 * fem, 33 * fem, 1 * fem),
-                    width: 35 * fem,
-                    height: 30 * fem,
-                    child: Image.asset(
-                      'assets/images/vector-home.png',
-                      width: 35 * fem,
-                      height: 30 * fem,
-                    ),
+    return Scaffold(
+      appBar: AppBar(
+          title: Image.asset(
+            "assets/images/logo.png",
+            fit: BoxFit.contain,
+            height: 5.h,
+          ),
+          toolbarHeight: 7.h,
+          backgroundColor: const Color(0xFFa31621),
+          actions: [
+            PopupMenuButton(
+              // add icon, by default "3 dot" icon
+              // icon: Icon(Icons.book)
+              itemBuilder: (context) {
+                return [
+                  const PopupMenuItem<int>(
+                    value: 0,
+                    child: Text("My Classes"),
                   ),
-                  Container(
-                    // logodraftdarkmode2x5JKJ (154:119)
-                    margin: EdgeInsets.fromLTRB(
-                        0 * fem, 0 * fem, 18.55 * fem, 0 * fem),
-                    width: 201 * fem,
-                    height: 43 * fem,
-                    child: Image.asset(
-                      'assets/images/final_text_with_logo2x.png',
-                      fit: BoxFit.cover,
-                    ),
+                  const PopupMenuItem<int>(
+                    value: 1,
+                    child: Text("Search Classrooms"),
                   ),
-                  Container(
-                    // usercircleNpx (154:116)
-                    margin:
-                        EdgeInsets.fromLTRB(0 * fem, 4 * fem, 0 * fem, 0 * fem),
-                    width: 33.91 * fem,
-                    height: 33.91 * fem,
-                    child: Image.asset(
-                      'assets/images/user-circle.png',
-                      width: 33.91 * fem,
-                      height: 33.91 * fem,
-                    ),
+                  const PopupMenuItem<int>(
+                    value: 2,
+                    child: Text("Navigate"),
                   ),
-                ],
-              ),
+                  const PopupMenuItem<int>(
+                      value: 3, child: Text("Calender (Beta)")),
+                  const PopupMenuItem<int>(value: 4, child: Text("Settings")),
+                  const PopupMenuItem<int>(value: 5, child: Text("AR Debug")),
+                ];
+              },
+              onSelected: (value) {
+                if (value == 0) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("My Classes"),
+                        content: const Text(""),
+                        actions: [
+                          MaterialButton(
+                            child: const Text("OK"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+                if (value == 1) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Search Classrooms"),
+                        content: const TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Ex. AES 220',
+                          ),
+                        ),
+                        actions: [
+                          MaterialButton(
+                            child: const Text("OK"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+                if (value == 2) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Navigate"),
+                        actions: [
+                          const TextField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Current Location",
+                            ),
+                          ),
+                          const TextField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Destination",
+                            ),
+                          ),
+                          MaterialButton(
+                            child: const Text("OK"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
             ),
-            Container(
-              // autogroup43rgsmi (V55zvE3UtB4ppCXJSf43rg)
-              padding:
-                  EdgeInsets.fromLTRB(18 * fem, 11 * fem, 22 * fem, 8 * fem),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xffa31621)),
-                color: Color(0xff78c091),
-                borderRadius: BorderRadius.circular(15 * fem),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    // vV6 (154:81)
-                    margin: EdgeInsets.fromLTRB(
-                        0 * fem, 3 * fem, 118 * fem, 0 * fem),
-                    child: Text(
-                      '--',
-                      style: SafeGoogleFont(
-                        'Inter',
-                        fontSize: 20 * ffem,
-                        fontWeight: FontWeight.w400,
-                        height: 1.2125 * ffem / fem,
-                        color: Color(0xff000000),
-                      ),
+          ]),
+      //
+      // Lets use docked FAB for handling state of sheet
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: GestureDetector(
+        //
+        // Set onVerticalDrag event to drag handlers of controller for swipe effect
+        onVerticalDragUpdate: DefaultBottomBarController.of(context).onDrag,
+        onVerticalDragEnd: DefaultBottomBarController.of(context).onDragEnd,
+        child: FloatingActionButton.extended(
+          label: AnimatedBuilder(
+            animation: DefaultBottomBarController.of(context).state,
+            builder: (context, child) => Row(
+              children: [
+                Text(
+                  DefaultBottomBarController.of(context).isOpen
+                      ? "Pull"
+                      : "Pull",
+                ),
+                const SizedBox(width: 4.0),
+                AnimatedBuilder(
+                  animation: DefaultBottomBarController.of(context).state,
+                  builder: (context, child) => Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.diagonal3Values(
+                      1,
+                      DefaultBottomBarController.of(context).state.value * 2 -
+                          1,
+                      1,
+                    ),
+                    child: child,
+                  ),
+                  child: const RotatedBox(
+                    quarterTurns: 1,
+                    child: Icon(
+                      Icons.chevron_right,
+                      size: 20,
                     ),
                   ),
-                  Container(
-                    // etaoYt (154:85)
-                    margin: EdgeInsets.fromLTRB(
-                        0 * fem, 0 * fem, 90 * fem, 1 * fem),
-                    child: Text(
-                      'ETA: --',
-                      style: SafeGoogleFont(
-                        'Inter',
-                        fontSize: 20 * ffem,
-                        fontWeight: FontWeight.w400,
-                        height: 1.2125 * ffem / fem,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    // arrowupsvgrepocom173n (154:82)
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                    ),
-                    child: Container(
-                      width: 26 * fem,
-                      height: 30 * fem,
-                      child: Image.asset(
-                        'assets/images/arrow-up.png',
-                        width: 26 * fem,
-                        height: 30 * fem,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
+          elevation: 2,
+          backgroundColor: const Color(0xFFa31621),
+          foregroundColor: const Color(0xFFfcf7f8),
+          //
+          //Set onPressed event to swap state of bottom bar
+          onPressed: () => DefaultBottomBarController.of(context).swap(),
+        ),
+      ),
+      bottomNavigationBar: BottomExpandableAppBar(
+        horizontalMargin: 16,
+        bottomAppBarColor: const Color(0xff78c091),
+        shape: const AutomaticNotchedShape(
+            RoundedRectangleBorder(), StadiumBorder(side: BorderSide())),
+        expandedBackColor: const Color(0xFFfcf7f8),
+        expandedBody: const Center(
+          child: Text("Hello world!"),
+        ),
+        bottomAppBarBody: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: const <Widget>[
+              Expanded(
+                child: Text(
+                  "Foo",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Spacer(
+                flex: 2,
+              ),
+              Expanded(
+                child: Text(
+                  "Bar",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
