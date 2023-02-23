@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uni_trail/views/login_page.dart';
-import 'package:uni_trail/views/sign_up_page.dart';
-import 'package:uni_trail/views/Widgets/my_button.dart';
+import 'package:unitrail/views/login_page.dart';
+import 'package:unitrail/views/sign_up_page.dart';
+import 'package:unitrail/views/Widgets/my_button.dart';
 import 'Components/_tile.dart';
 
 class Welcome extends StatelessWidget{
