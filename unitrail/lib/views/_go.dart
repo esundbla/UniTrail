@@ -11,6 +11,9 @@ class Go extends StatefulWidget {
 }
 
 class _Go extends State<Go> {
+    var start;
+    var dest;
+  
   @override
   Widget build(BuildContext context) {
     //readData() returns all buildings and all rooms currently stored in the database
@@ -59,8 +62,6 @@ class _Go extends State<Go> {
       return await db_call();
     }
 
-    var start;
-    var dest;
     return Scaffold(
         body: Center(
             child: Column(
