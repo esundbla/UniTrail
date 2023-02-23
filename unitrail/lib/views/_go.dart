@@ -1,57 +1,128 @@
 import 'package:flutter/material.dart';
+import 'components/rounded_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:search_choices/search_choices.dart';
 
-class Text_field extends StatelessWidget{
-  final controller; // Lets us access what the user typed into the text field
-  final String hintText;
-  final bool obscureText;
-
-  const Text_field({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    required this.obscureText,
-  });
+class Go extends StatefulWidget {
+  const Go({super.key});
 
   @override
+  _Go createState() => _Go();
+}
+
+class _Go extends State<Go> {
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+    //readData() returns all buildings and all rooms currently stored in the database
+    Future<List<DropdownMenuItem<String>>> readData() async {
+      CollectionReference buildings =
+          FirebaseFirestore.instance.collection("Buildings");
+      //Secondary function to assure async executiong
+      Future<List<DropdownMenuItem<String>>> db_call() async {
+        //get list of buldings
+        var buildSnap = await buildings.get();
+        //Buildrooms is the final list object we aggregate for the search_choice widget
+        List<DropdownMenuItem<String>> buildRooms = [];
+        //For all buildings
+        for (var building in buildSnap.docs) {
+          var floorsnap =
+              await buildings.doc(building.id).collection("Floors").get();
+          //For every floor on current building
+          for (var floor in floorsnap.docs) {
+            //print(floor.id);
+            var roomsnap = await buildings
+                .doc(building.id)
+                .collection("Floors")
+                .doc(floor.id)
+                .get();
+            var data;
+            //Null check room documents
+            if (roomsnap.exists) {
+              data = await roomsnap.data();
+            }
+            //For every room on given floor
+            for (var room in data.keys) {
+              //create dropDownMenuItem with string of "building" + "room #"
+              var toAdd = await (DropdownMenuItem(
+                value: building.id + room,
+                child: Text(building.id + room),
+              ));
+              buildRooms.add(toAdd);
+            }
+          }
+        }
+        //First function return
+        return buildRooms;
+      }
 
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
+      //final async return call
+      return await db_call();
+    }
 
-            ),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey.shade800),
-                borderRadius: BorderRadius.circular(12)
-            ),
-            fillColor:  Colors.grey.shade200,
-            filled: true,
-            hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey[500])
-        ),
-        // decoration: BoxDecoration(
-        //     color: Colors.grey[200],
-        //     border: Border.all(color: Colors.white),
-        //     borderRadius: BorderRadius.circular(12)
-        // ),
-        // child: Padding(
-        //   padding: const EdgeInsets.only(left: 20.0),
-        //   child: TextField(
-        //
-        //     decoration: InputDecoration(
-        //         border: InputBorder.none,
-        //         hintText: 'Email'
-        //     ),
-        //   ),
-        // ),
-      ),
-    );
-    //throw UnimplementedError();
+    var start;
+    var dest;
+    return Scaffold(
+        body: Center(
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+
+                //Widget list for given page.
+                children: <Widget>[
+          Text("Begining"),
+
+          //Future Builder for start location searchChoices
+          FutureBuilder(
+              future: readData(),
+              builder: (context,
+                  AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  var buildRooms = snapshot.data;
+                  //print(buildRooms);
+                  return SearchChoices.single(
+                    items: buildRooms,
+                    value: start,
+                    hint: "Select one",
+                    searchHint: "Select one",
+                    onChanged: (value) {
+                      setState(() {
+                        start = value;
+                      });
+                    },
+                    isExpanded: true,
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
+
+          Text("Destination"),
+
+          //Future Builder for Destination Search choices
+          FutureBuilder(
+              future: readData(),
+              builder: (context,
+                  AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  var buildRooms = snapshot.data;
+                  //print(buildRooms);
+                  return SearchChoices.single(
+                    items: buildRooms,
+                    value: dest,
+                    hint: "Select one",
+                    searchHint: "Select one",
+                    onChanged: (value) {
+                      setState(() {
+                        dest = value;
+                      });
+                    },
+                    isExpanded: true,
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
+        ])));
   }
 }
