@@ -1,7 +1,7 @@
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:unitrail/homeScreen.dart';
+import 'package:unitrail/views/HomeScreen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:device_preview/device_preview.dart';
 
@@ -14,12 +14,14 @@ void main() {
   runApp(
     DevicePreview(
       enabled: true,
-      builder: (context) => unitrail(),
+      builder: (context) => const UniTrail(),
     ),
   );
 }
 
-class unitrail extends StatelessWidget {
+class UniTrail extends StatelessWidget {
+  const UniTrail({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
@@ -29,7 +31,7 @@ class unitrail extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: DefaultBottomBarController(child: const homeScreen()),
+        home: DefaultBottomBarController(child: const HomeScreen()),
       );
     });
   }
