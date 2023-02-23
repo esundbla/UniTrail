@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:uni_trail/views/Components/text_field.dart';
-import 'package:uni_trail/views/Widgets/my_button.dart';
+import 'package:unitrail/views/Components/text_field.dart';
+import 'package:unitrail/views/Widgets/my_button.dart';
 
 
 import 'Components/_tile.dart';
