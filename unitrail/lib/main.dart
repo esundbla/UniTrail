@@ -2,7 +2,6 @@ import 'package:unitrail/views/_welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:unitrail/BackEndTesting/Testing.dart';
 import 'firebase_options.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/services.dart';
@@ -14,19 +13,14 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
-  runApp(
-     DevicePreview(
-      enabled: true,
-      builder: (context) => const MyApp());
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(DevicePreview(enabled: true, builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
         title: 'UniTrail',
@@ -37,5 +31,5 @@ class MyApp extends StatelessWidget {
         home: DefaultBottomBarController(child: Welcome()),
       );
     });
-  }  
+  }
 }

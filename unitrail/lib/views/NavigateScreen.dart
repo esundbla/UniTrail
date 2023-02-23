@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'components/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:search_choices/search_choices.dart';
 
@@ -7,11 +7,10 @@ class NavigateScreen extends StatefulWidget {
   const NavigateScreen({super.key});
 
   @override
-  _NavigateState createState() => _NavigateState();
+  _NavigateScreenState createState() => _NavigateScreenState();
 }
 
-class _NavigateState extends State<NavigateScreen> {
-  //Variables to hold responses to search_choices
+class _NavigateScreenState extends State<NavigateScreen> {
   var start;
   var dest;
 
@@ -63,93 +62,76 @@ class _NavigateState extends State<NavigateScreen> {
       return await db_call();
     }
 
-    Size size = MediaQuery.of(context)
-        .size; // This provides the total width and height of our screen
     return Scaffold(
-        appBar: AppBar(
-            title: Image.asset(
-              "assets/images/logo.png",
-              fit: BoxFit.contain,
-              height: 5.h,
-            ),
-            toolbarHeight: 7.h,
-            backgroundColor: const Color(0xFFa31621),
-            actions: const []),
         body: Center(
             child: Column(
                 mainAxisSize: MainAxisSize.min,
 
                 //Widget list for given page.
                 children: <Widget>[
-              SizedBox(height: size.height * 0.1),
-              const Text(
-                "Testing",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 1, 16, 129),
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+          Text("Begining"),
 
-              SizedBox(height: size.height * 0.1),
+          //Future Builder for start location searchChoices
+          FutureBuilder(
+              future: readData(),
+              builder: (context,
+                  AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  var buildRooms = snapshot.data;
+                  //print(buildRooms);
+                  return SearchChoices.single(
+                    items: buildRooms,
+                    value: start,
+                    hint: "Select one",
+                    searchHint: "Select one",
+                    onChanged: (value) {
+                      setState(() {
+                        start = value;
+                      });
+                    },
+                    isExpanded: true,
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
 
-              const Text("Begining"),
+          Text("Destination"),
 
-              //Future Builder for start location searchChoices
-              FutureBuilder(
-                  future: readData(),
-                  builder: (context,
-                      AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done &&
-                        snapshot.hasData) {
-                      var buildRooms = snapshot.data;
-                      //print(buildRooms);
-                      return SearchChoices.single(
-                        items: buildRooms,
-                        value: start,
-                        hint: "Select one",
-                        searchHint: "Select one",
-                        onChanged: (value) {
-                          setState(() {
-                            start = value;
-                          });
-                        },
-                        isExpanded: true,
-                      );
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  }),
-
-              const Text("Destination"),
-
-              //Future Builder for Destination Search choices
-              FutureBuilder(
-                  future: readData(),
-                  builder: (context,
-                      AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done &&
-                        snapshot.hasData) {
-                      var buildRooms = snapshot.data;
-                      //print(buildRooms);
-                      return SearchChoices.single(
-                        items: buildRooms,
-                        value: dest,
-                        hint: "Select one",
-                        searchHint: "Select one",
-                        onChanged: (value) {
-                          setState(() {
-                            dest = value;
-                          });
-                        },
-                        isExpanded: true,
-                      );
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  }),
-
-              //Crud testing button
-            ])));
+          //Future Builder for Destination Search choices
+          FutureBuilder(
+              future: readData(),
+              builder: (context,
+                  AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  var buildRooms = snapshot.data;
+                  //print(buildRooms);
+                  return SearchChoices.single(
+                    items: buildRooms,
+                    value: dest,
+                    hint: "Select one",
+                    searchHint: "Select one",
+                    onChanged: (value) {
+                      setState(() {
+                        dest = value;
+                      });
+                    },
+                    isExpanded: true,
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
+          //Navigate testing button
+          RoundedButton(
+            text: "Navigate",
+            press: () {
+              print("Start: " + start);
+              print("Destination: " + dest);
+            },
+          ),
+        ])));
   }
 }
