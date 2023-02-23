@@ -1,6 +1,7 @@
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:unitrail/views/NavigateScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -70,96 +71,99 @@ class HomeScreen extends StatelessWidget {
                   );
                 }
                 if (value == 1) {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text("Search Classrooms"),
-                        shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                color: Color(0xFFa31621), width: 5),
-                            borderRadius: BorderRadius.circular(20.0)),
-                        content: const TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Ex. AES 220',
-                          ),
-                        ),
-                        actions: [
-                          ElevatedButton(
-                              // ignore: sort_child_properties_last
-                              child: const Text("Add to My Classes"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff78c091),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(20)))),
-                        ],
-                      );
-                    },
-                  );
-                }
-                if (value == 2) {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                          title: const Text("Navigate"),
-                          actionsAlignment: MainAxisAlignment.center,
-                          shape: RoundedRectangleBorder(
-                              side: const BorderSide(
-                                  color: Color(0xFFa31621), width: 5),
-                              borderRadius: BorderRadius.circular(20.0)),
-                          actions: [
-                            const TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: "Current Location",
-                              ),
-                            ),
-                            const TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: "Destination",
-                              ),
-                            ),
-                            ButtonBar(
-                              children: [
-                                ElevatedButton(
-                                    // ignore: sort_child_properties_last
-                                    child: const Text("Cancel"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xFFa31621),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)))),
-                                ElevatedButton(
-                                    // ignore: sort_child_properties_last
-                                    child: const Text("Go"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xff78c091),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)))),
-                              ],
-                            )
-                          ]);
-                    },
-                  );
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return NavigateScreen();
+                  }));
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) {
+                  //       return AlertDialog(
+                  //         title: const Text("Search Classrooms"),
+                  //         shape: RoundedRectangleBorder(
+                  //             side: const BorderSide(
+                  //                 color: Color(0xFFa31621), width: 5),
+                  //             borderRadius: BorderRadius.circular(20.0)),
+                  //         content: const TextField(
+                  //           obscureText: true,
+                  //           decoration: InputDecoration(
+                  //             border: OutlineInputBorder(),
+                  //             labelText: 'Ex. AES 220',
+                  //           ),
+                  //         ),
+                  //         actions: [
+                  //           ElevatedButton(
+                  //               // ignore: sort_child_properties_last
+                  //               child: const Text("Add to My Classes"),
+                  //               onPressed: () {
+                  //                 Navigator.of(context).pop();
+                  //               },
+                  //               style: ElevatedButton.styleFrom(
+                  //                   backgroundColor: const Color(0xff78c091),
+                  //                   shape: RoundedRectangleBorder(
+                  //                       borderRadius:
+                  //                           BorderRadius.circular(20)))),
+                  //         ],
+                  //       );
+                  //     },
+                  //   );
+                  // }
+                  // if (value == 2) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) {
+                  //       return AlertDialog(
+                  //           title: const Text("Navigate"),
+                  //           actionsAlignment: MainAxisAlignment.center,
+                  //           shape: RoundedRectangleBorder(
+                  //               side: const BorderSide(
+                  //                   color: Color(0xFFa31621), width: 5),
+                  //               borderRadius: BorderRadius.circular(20.0)),
+                  //           actions: [
+                  //             const TextField(
+                  //               obscureText: true,
+                  //               decoration: InputDecoration(
+                  //                 border: OutlineInputBorder(),
+                  //                 labelText: "Current Location",
+                  //               ),
+                  //             ),
+                  //             const TextField(
+                  //               obscureText: true,
+                  //               decoration: InputDecoration(
+                  //                 border: OutlineInputBorder(),
+                  //                 labelText: "Destination",
+                  //               ),
+                  //             ),
+                  //             ButtonBar(
+                  //               children: [
+                  //                 ElevatedButton(
+                  //                     // ignore: sort_child_properties_last
+                  //                     child: const Text("Cancel"),
+                  //                     onPressed: () {
+                  //                       Navigator.of(context).pop();
+                  //                     },
+                  //                     style: ElevatedButton.styleFrom(
+                  //                         backgroundColor:
+                  //                             const Color(0xFFa31621),
+                  //                         shape: RoundedRectangleBorder(
+                  //                             borderRadius:
+                  //                                 BorderRadius.circular(20)))),
+                  //                 ElevatedButton(
+                  //                     // ignore: sort_child_properties_last
+                  //                     child: const Text("Go"),
+                  //                     onPressed: () {
+                  //                       Navigator.of(context).pop();
+                  //                     },
+                  //                     style: ElevatedButton.styleFrom(
+                  //                         backgroundColor:
+                  //                             const Color(0xff78c091),
+                  //                         shape: RoundedRectangleBorder(
+                  //                             borderRadius:
+                  //                                 BorderRadius.circular(20)))),
+                  //               ],
+                  //             )
+                  //           ]);
+                  //     },
+                  //   );
                 }
               },
             ),

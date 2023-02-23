@@ -25,7 +25,7 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
         title: 'UniTrail',
@@ -36,5 +36,5 @@ class MyApp extends StatelessWidget {
         home: DefaultBottomBarController(child: Welcome()),
       );
     });
-  }  
+  }
 }
