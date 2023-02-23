@@ -32,7 +32,7 @@ public class SpawnController : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
-        spawnPoint = GameObject.Find("AES_Room_210").transform;
+        spawnPoint = GameObject.Find("AES_Room_237").transform;
         target = GameObject.Find("AES_Room_285").transform;
         xrOrigin = GameObject.Find("XR Origin").transform;
 

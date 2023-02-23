@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.XR.ARFoundation;
 
 public class PlayerController : MonoBehaviour
 {
+    public ARCameraManager arCameraManager;
     private NavMeshAgent agent;
     private LineRenderer line;
     private Transform target;
@@ -19,6 +21,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Transform cameraTransform = arCameraManager.GetComponent<Camera>().transform;
+        Quaternion cameraRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
+        transform.rotation = cameraRotation;
+
         if (agent.hasPath)
         {
             DrawPath();
@@ -28,6 +34,7 @@ public class PlayerController : MonoBehaviour
     void DrawPath()
     {
         line.positionCount = agent.path.corners.Length;
+        transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
         line.SetPosition(0, transform.position);
 
         if (agent.path.corners.Length < 2)
