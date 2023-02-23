@@ -123,14 +123,14 @@ class _Go extends State<Go> {
                   return const CircularProgressIndicator();
                 }
               }),
-              //Navigate testing button
-            RoundedButton(
-              text: "Navigate",
-              press: () {
-                print("Start: " + start);
-                print("Destination: " + dest);
-              },
-            ),
+          //Navigate testing button
+          RoundedButton(
+            text: "Navigate",
+            press: () {
+              print("Start: " + start);
+              print("Destination: " + dest);
+            },
+          ),
         ])));
   }
 }
