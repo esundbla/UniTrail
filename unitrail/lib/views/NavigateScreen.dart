@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'components/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:search_choices/search_choices.dart';
+import 'package:sizer/sizer.dart';
 
 class NavigateScreen extends StatefulWidget {
   const NavigateScreen({super.key});
@@ -63,75 +63,93 @@ class _NavigateScreenState extends State<NavigateScreen> {
     }
 
     return Scaffold(
+        backgroundColor: Color(0xFFa31621),
+        appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Color(0xFFfcf7f8)),
+              onPressed: () => Navigator.of(context).pop(context),
+            ),
+            title: Image.asset(
+              "assets/images/team_logo.png",
+              fit: BoxFit.contain,
+              height: 5.h,
+            ),
+            toolbarHeight: 7.h,
+            backgroundColor: const Color(0xFFa31621),
+            actions: []),
         body: Center(
             child: Column(
                 mainAxisSize: MainAxisSize.min,
 
                 //Widget list for given page.
                 children: <Widget>[
-          Text("Begining"),
+              Text("Begining"),
 
-          //Future Builder for start location searchChoices
-          FutureBuilder(
-              future: readData(),
-              builder: (context,
-                  AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData) {
-                  var buildRooms = snapshot.data;
-                  //print(buildRooms);
-                  return SearchChoices.single(
-                    items: buildRooms,
-                    value: start,
-                    hint: "Select one",
-                    searchHint: "Select one",
-                    onChanged: (value) {
-                      setState(() {
-                        start = value;
-                      });
-                    },
-                    isExpanded: true,
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }),
+              //Future Builder for start location searchChoices
+              FutureBuilder(
+                  future: readData(),
+                  builder: (context,
+                      AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.hasData) {
+                      var buildRooms = snapshot.data;
+                      //print(buildRooms);
+                      return SearchChoices.single(
+                        items: buildRooms,
+                        value: start,
+                        hint: "Select one",
+                        searchHint: "Select one",
+                        onChanged: (value) {
+                          setState(() {
+                            start = value;
+                          });
+                        },
+                        isExpanded: true,
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  }),
 
-          Text("Destination"),
+              Text("Destination"),
 
-          //Future Builder for Destination Search choices
-          FutureBuilder(
-              future: readData(),
-              builder: (context,
-                  AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData) {
-                  var buildRooms = snapshot.data;
-                  //print(buildRooms);
-                  return SearchChoices.single(
-                    items: buildRooms,
-                    value: dest,
-                    hint: "Select one",
-                    searchHint: "Select one",
-                    onChanged: (value) {
-                      setState(() {
-                        dest = value;
-                      });
-                    },
-                    isExpanded: true,
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }),
-          //Navigate testing button
-          RoundedButton(
-            text: "Navigate",
-            press: () {
-              print("Start: " + start);
-              print("Destination: " + dest);
-            },
-          ),
-        ])));
+              //Future Builder for Destination Search choices
+              FutureBuilder(
+                  future: readData(),
+                  builder: (context,
+                      AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.hasData) {
+                      var buildRooms = snapshot.data;
+                      //print(buildRooms);
+                      return SearchChoices.single(
+                        items: buildRooms,
+                        value: dest,
+                        hint: "Select one",
+                        searchHint: "Select one",
+                        onChanged: (value) {
+                          setState(() {
+                            dest = value;
+                          });
+                        },
+                        isExpanded: true,
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  }),
+              ElevatedButton(
+                  // ignore: sort_child_properties_last
+                  child: Text("Navigate"),
+                  onPressed: () {
+                    print("Start: " + start);
+                    print("Destination: " + dest);
+                  },
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size.fromWidth(50.w),
+                      backgroundColor: const Color(0xff78c091),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)))),
+            ])));
   }
 }
