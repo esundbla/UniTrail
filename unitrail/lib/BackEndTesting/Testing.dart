@@ -12,19 +12,17 @@ class BackendTesting extends StatefulWidget {
 }
 
 class _BackendTestingState extends State<BackendTesting> {
-  
   //Variables to hold responses to search_choices
-  var start;    
+  var start;
   var dest;
 
   @override
   Widget build(BuildContext context) {
-    
     //readData() returns all buildings and all rooms currently stored in the database
     Future<List<DropdownMenuItem<String>>> readData() async {
       CollectionReference buildings =
           FirebaseFirestore.instance.collection("Buildings");
-          //Secondary function to assure async executiong
+      //Secondary function to assure async executiong
       Future<List<DropdownMenuItem<String>>> db_call() async {
         //get list of buldings
         var buildSnap = await buildings.get();
@@ -61,6 +59,7 @@ class _BackendTestingState extends State<BackendTesting> {
         //First function return
         return buildRooms;
       }
+
       //final async return call
       return await db_call();
     }
@@ -71,8 +70,8 @@ class _BackendTestingState extends State<BackendTesting> {
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          
-          //Widget list for given page. 
+
+          //Widget list for given page.
           children: <Widget>[
             SizedBox(height: size.height * 0.1),
             const Text(
@@ -97,8 +96,7 @@ class _BackendTestingState extends State<BackendTesting> {
                       snapshot.hasData) {
                     var buildRooms = snapshot.data;
                     //print(buildRooms);
-                    return 
-                    SearchChoices.single(
+                    return SearchChoices.single(
                       items: buildRooms,
                       value: start,
                       hint: "Select one",
@@ -143,7 +141,7 @@ class _BackendTestingState extends State<BackendTesting> {
                   }
                 }),
 
-            //Crud testing button    
+            //Crud testing button
             RoundedButton(
               text: "CRUD",
               press: () {
