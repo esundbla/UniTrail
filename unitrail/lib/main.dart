@@ -4,6 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:unitrail/BackEndTesting/Testing.dart';
 import 'firebase_options.dart';
+import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
+import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
+import 'package:device_preview/device_preview.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,20 +18,24 @@ Future main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
   ]);
-  runApp(MyApp());
+  runApp(
+     DevicePreview(
+      enabled: true,
+      builder: (context) => const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    return MaterialApp(
-      title: 'UniTrail',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-
-      ),
-      home: Welcome(),
-    );
-  }   
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        title: 'UniTrail',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: DefaultBottomBarController(child: Welcome()),
+      );
+    });
+  }  
 }
