@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/text_field.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
-import 'package:unitrail/views/HomeScreen.dart';
+import 'package:unitrail/views/home.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
-import 'Components/_tile.dart';
+import 'Components/tile.dart';
 
 class LoginPage extends StatelessWidget {
   final emailController = TextEditingController();
