@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PreviewPath : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class PreviewPath : MonoBehaviour
         line = transform.GetComponent<LineRenderer>();
         lineHeightStart = new Vector3(start.transform.position.x,start.transform.position.y + 1.5f,start.transform.position.z);
         lineHeightDestination = new Vector3(navTargetObject.transform.position.x,navTargetObject.transform.position.y + 1.5f,navTargetObject.transform.position.z);
+        PlayerPrefs.SetString("start", start.name);
+        PlayerPrefs.SetString("end", navTargetObject.name);
+        int previewSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("previousSceneIndex", previewSceneIndex);
     }
 
     void Update()
