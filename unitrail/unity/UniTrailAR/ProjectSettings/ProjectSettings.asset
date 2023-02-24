@@ -138,10 +138,10 @@ PlayerSettings:
     Others: 1
   bundleVersion: 0.1
   preloadedAssets:
-  - {fileID: 4800000, guid: e7c77f6eaab324a819efdc13b8125a39, type: 3}
-  - {fileID: 4800000, guid: 6743a50a812740be8c0aa3fccc46fae9, type: 3}
-  - {fileID: 3016158640881660988, guid: d593aaf76064543789e6f084263887b2, type: 2}
+  - {fileID: 2886299709596259242, guid: d593aaf76064543789e6f084263887b2, type: 2}
   - {fileID: 11400000, guid: a8f7084f2bdef4e1ea693a18ddd6d963, type: 2}
+  - {fileID: 4800000, guid: c9f956787b1d945e7b36e0516201fc76, type: 3}
+  - {fileID: 4800000, guid: 0945859e5a1034c2cb6dce53cb4fb899, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -571,7 +571,7 @@ PlayerSettings:
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
   cameraUsageDescription: Required Camera
-  locationUsageDescription: Required Location
+  locationUsageDescription: 
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
   switchNMETAOverride: 
@@ -827,7 +827,7 @@ PlayerSettings:
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
   enableRoslynAnalyzers: 1
-  selectedPlatform: 3
+  selectedPlatform: 2
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1
