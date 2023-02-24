@@ -3,7 +3,7 @@ import 'package:unitrail/views/login_page.dart';
 import 'package:unitrail/views/sign_up_page.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
 import 'Components/_tile.dart';
-import 'package:unitrail/views/_go.dart';
+import 'package:unitrail/views/go.dart';
 
 class Welcome extends StatelessWidget {
   @override

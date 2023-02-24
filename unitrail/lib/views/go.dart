@@ -20,7 +20,7 @@ class _Go extends State<Go> {
     CollectionReference buildings =
         FirebaseFirestore.instance.collection("Buildings");
     //Secondary function to assure async executiong
-    Future<List<DropdownMenuItem<String>>> db_call() async {
+    Future<List<DropdownMenuItem<String>>> dbCall() async {
       //get list of buldings
       var buildSnap = await buildings.get();
       //Buildrooms is the final list object we aggregate for the search_choice widget
@@ -58,7 +58,7 @@ class _Go extends State<Go> {
     }
 
     //final async return call
-    return await db_call();
+    return await dbCall();
   }
 
   @override
