@@ -13,10 +13,17 @@ TagManager:
   - UI
   - 
   - 
+<<<<<<< HEAD
   - Floor
   - Walls
   - Indicator
   - 
+=======
+  - 
+  - 
+  - Floor
+  - Wall
+>>>>>>> 465d6a22a4b577521423c99d4d905b3246ba250e
   - 
   - 
   - 
