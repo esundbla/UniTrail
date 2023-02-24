@@ -43,18 +43,12 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-<<<<<<< HEAD
 
 /ios/UnityLibrary
 /android/UnityLibrary
 
-=======
 # Google API keys
-<<<<<<< HEAD
 ios/Runner/GoogleService-Info.plist
 macos/Runner/GoogleService-Info.plist
->>>>>>> 419ea231cae1221af01f4898ee3c40ab7feb0829
-=======
 unitrail/ios/Runner/GoogleService-Info.plist
 unitrail/macos/Runner/GoogleService-Info.plist
->>>>>>> 115ce0a75a4820e9dcceef08525a65cd1a66c992
