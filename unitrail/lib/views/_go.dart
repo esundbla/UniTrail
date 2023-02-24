@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'components/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:search_choices/search_choices.dart';
-
+import 'package:unitrail/views/preview.dart';
 class Go extends StatefulWidget {
   const Go({super.key});
 
@@ -128,8 +128,10 @@ class _Go extends State<Go> {
           RoundedButton(
             text: "Navigate",
             press: () {
-              print("Start: " + start);
-              print("Destination: " + dest);
+
+               Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return UnityDemoScreen();
+                }));
             },
           ),
         ])));

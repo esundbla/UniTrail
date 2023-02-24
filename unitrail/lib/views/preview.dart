@@ -24,7 +24,6 @@ class _UnityDemoScreenState extends State<UnityDemoScreen>{
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Preview")),
       key: _scaffoldKey,
       body: SafeArea(
         bottom: false,
