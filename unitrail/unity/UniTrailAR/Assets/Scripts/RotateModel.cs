@@ -16,7 +16,7 @@ public class RotateModel : MonoBehaviour
             // APPLY ROTATION
             if (touch0.phase == TouchPhase.Moved)
             {
-                transform.Rotate(0f, 0f, touch0.deltaPosition.x * rotationSpeed);
+                transform.Rotate(0f, 0f, -touch0.deltaPosition.x * rotationSpeed);
                 
             }
  
