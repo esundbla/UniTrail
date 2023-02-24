@@ -42,3 +42,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Google API keys
+unitrail/ios/Runner/GoogleService-Info.plist
+unitrail/macos/Runner/GoogleService-Info.plist
