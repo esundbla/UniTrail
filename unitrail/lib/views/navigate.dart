@@ -13,6 +13,7 @@ class NavigateScreen extends StatefulWidget {
 class _NavigateScreenState extends State<NavigateScreen> {
   var start;
   var dest;
+  List<DropdownMenuItem<String>>? buildRooms = [];
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +96,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
                               snapshot) {
                         if (snapshot.connectionState == ConnectionState.done &&
                             snapshot.hasData) {
-                          var buildRooms = snapshot.data;
+                          buildRooms = snapshot.data;
                           //print(buildRooms);
                           return SearchChoices.single(
                             items: buildRooms,
@@ -116,32 +117,18 @@ class _NavigateScreenState extends State<NavigateScreen> {
 
                   Text("Destination"),
 
-                  //Future Builder for Destination Search choices
-                  FutureBuilder(
-                      future: readData(),
-                      builder: (context,
-                          AsyncSnapshot<List<DropdownMenuItem<String>>>
-                              snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done &&
-                            snapshot.hasData) {
-                          var buildRooms = snapshot.data;
-                          //print(buildRooms);
-                          return SearchChoices.single(
-                            items: buildRooms,
-                            value: dest,
-                            hint: "Select one",
-                            searchHint: "Select one",
-                            onChanged: (value) {
-                              setState(() {
-                                dest = value;
-                              });
-                            },
-                            isExpanded: true,
-                          );
-                        } else {
-                          return const CircularProgressIndicator();
-                        }
-                      }),
+                  SearchChoices.single(
+                    items: buildRooms,
+                    value: dest,
+                    hint: "Select one",
+                    searchHint: "Select one",
+                    onChanged: (value) {
+                      setState(() {
+                        dest = value;
+                      });
+                    },
+                    isExpanded: true,
+                  ),
                   ElevatedButton(
                       // ignore: sort_child_properties_last
                       child: Text("Navigate"),
