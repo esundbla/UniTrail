@@ -19,14 +19,13 @@ class HomeScreen extends StatelessWidget {
           toolbarHeight: 7.h,
           backgroundColor: const Color(0xFFa31621),
           actions: [
-            FloatingActionButton(
+            TextButton(
               onPressed: () {},
               // ignore: sort_child_properties_last
               child: Icon(
                 Icons.logout_rounded,
-                color: Colors.black,
+                color: Color(0xFFfcf7f8),
               ),
-              backgroundColor: Color(0xFFfcf7f8),
             )
           ]),
       body: Column(

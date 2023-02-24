@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:unitrail/views/HomeScreen.dart';
+import 'package:unitrail/views/home.dart';
 import 'package:unitrail/views/login_page.dart';
 import 'package:unitrail/views/sign_up_page.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
-import 'Components/_tile.dart';
-import 'package:unitrail/views/NavigateScreen.dart';
+import 'Components/tile.dart';
+import 'package:unitrail/views/navigate.dart';
 
 class Welcome extends StatelessWidget {
   @override

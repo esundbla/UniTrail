@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unitrail/views/NavigateScreen.dart';
+import 'package:unitrail/views/navigate.dart';
+import 'package:unitrail/views/settings.dart';
 
 // ignore: must_be_immutable
 class GridDashboard extends StatelessWidget {
@@ -10,7 +11,9 @@ class GridDashboard extends StatelessWidget {
   Items item2 = Items(title: "My Classes", routeName: null);
   Items item3 = Items(title: "Search Classrooms", routeName: null);
   Items item4 = Items(title: "Calendar (Beta)", routeName: null);
-  Items item5 = Items(title: "Settings", routeName: null);
+  Items item5 = Items(
+      title: "Settings",
+      routeName: MaterialPageRoute(builder: (context) => SettingsScreen()));
   Items item6 = Items(title: "AR Debug", routeName: null);
 
   @override
