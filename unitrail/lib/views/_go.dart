@@ -11,56 +11,58 @@ class Go extends StatefulWidget {
 }
 
 class _Go extends State<Go> {
-  @override
-  Widget build(BuildContext context) {
-    //readData() returns all buildings and all rooms currently stored in the database
-    Future<List<DropdownMenuItem<String>>> readData() async {
-      CollectionReference buildings =
-          FirebaseFirestore.instance.collection("Buildings");
-      //Secondary function to assure async executiong
-      Future<List<DropdownMenuItem<String>>> db_call() async {
-        //get list of buldings
-        var buildSnap = await buildings.get();
-        //Buildrooms is the final list object we aggregate for the search_choice widget
-        List<DropdownMenuItem<String>> buildRooms = [];
-        //For all buildings
-        for (var building in buildSnap.docs) {
-          var floorsnap =
-              await buildings.doc(building.id).collection("Floors").get();
-          //For every floor on current building
-          for (var floor in floorsnap.docs) {
-            //print(floor.id);
-            var roomsnap = await buildings
-                .doc(building.id)
-                .collection("Floors")
-                .doc(floor.id)
-                .get();
-            var data;
-            //Null check room documents
-            if (roomsnap.exists) {
-              data = await roomsnap.data();
-            }
-            //For every room on given floor
-            for (var room in data.keys) {
-              //create dropDownMenuItem with string of "building" + "room #"
-              var toAdd = await (DropdownMenuItem(
-                value: building.id + room,
-                child: Text(building.id + room),
-              ));
-              buildRooms.add(toAdd);
-            }
+  var start;
+  var dest;
+  List<DropdownMenuItem<String>>? finalRooms = [];
+
+  //readData() returns all buildings and all rooms currently stored in the database
+  Future<List<DropdownMenuItem<String>>> readData() async {
+    CollectionReference buildings =
+        FirebaseFirestore.instance.collection("Buildings");
+    //Secondary function to assure async executiong
+    Future<List<DropdownMenuItem<String>>> db_call() async {
+      //get list of buldings
+      var buildSnap = await buildings.get();
+      //Buildrooms is the final list object we aggregate for the search_choice widget
+      List<DropdownMenuItem<String>> buildRooms = [];
+      //For all buildings
+      for (var building in buildSnap.docs) {
+        var floorsnap =
+            await buildings.doc(building.id).collection("Floors").get();
+        //For every floor on current building
+        for (var floor in floorsnap.docs) {
+          //print(floor.id);
+          var roomsnap = await buildings
+              .doc(building.id)
+              .collection("Floors")
+              .doc(floor.id)
+              .get();
+          var data;
+          //Null check room documents
+          if (roomsnap.exists) {
+            data = await roomsnap.data();
+          }
+          //For every room on given floor
+          for (var room in data.keys) {
+            //create dropDownMenuItem with string of "building" + "room #"
+            var toAdd = await (DropdownMenuItem(
+              value: building.id + room,
+              child: Text(building.id + room),
+            ));
+            buildRooms.add(toAdd);
           }
         }
-        //First function return
-        return buildRooms;
       }
-
-      //final async return call
-      return await db_call();
+      //First function return
+      return buildRooms;
     }
 
-    var start;
-    var dest;
+    //final async return call
+    return await db_call();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
             child: Column(
@@ -77,10 +79,10 @@ class _Go extends State<Go> {
                   AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done &&
                     snapshot.hasData) {
-                  var buildRooms = snapshot.data;
+                  finalRooms = snapshot.data;
                   //print(buildRooms);
                   return SearchChoices.single(
-                    items: buildRooms,
+                    items: finalRooms,
                     value: start,
                     hint: "Select one",
                     searchHint: "Select one",
@@ -99,30 +101,19 @@ class _Go extends State<Go> {
           Text("Destination"),
 
           //Future Builder for Destination Search choices
-          FutureBuilder(
-              future: readData(),
-              builder: (context,
-                  AsyncSnapshot<List<DropdownMenuItem<String>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData) {
-                  var buildRooms = snapshot.data;
-                  //print(buildRooms);
-                  return SearchChoices.single(
-                    items: buildRooms,
-                    value: dest,
-                    hint: "Select one",
-                    searchHint: "Select one",
-                    onChanged: (value) {
-                      setState(() {
-                        dest = value;
-                      });
-                    },
-                    isExpanded: true,
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }),
+          SearchChoices.single(
+            items: finalRooms,
+            value: dest,
+            hint: "Select one",
+            searchHint: "Select one",
+            onChanged: (value) {
+              setState(() {
+                dest = value;
+              });
+            },
+            isExpanded: true,
+          ),
+
           //Navigate testing button
           RoundedButton(
             text: "Navigate",
