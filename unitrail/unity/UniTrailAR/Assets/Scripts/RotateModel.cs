@@ -6,8 +6,6 @@ using UnityEngine.AI;
 public class RotateModel : MonoBehaviour
 {
     // Variables for rotating the ob
-    public Transform parentObject;   
-    public List<Transform> childObjects = new List<Transform>();
     private float rotationSpeed = 0.1f;
     void Update()
     {
@@ -18,7 +16,7 @@ public class RotateModel : MonoBehaviour
             // APPLY ROTATION
             if (touch0.phase == TouchPhase.Moved)
             {
-                transform.Rotate(0f, touch0.deltaPosition.x * rotationSpeed, 0f);
+                transform.Rotate(0f, 0f, touch0.deltaPosition.x * rotationSpeed);
                 
             }
  
