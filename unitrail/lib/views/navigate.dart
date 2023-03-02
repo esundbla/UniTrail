@@ -49,8 +49,8 @@ class _NavigateScreenState extends State<NavigateScreen> {
             for (var room in data.keys) {
               //create dropDownMenuItem with string of "building" + "room #"
               var toAdd = await (DropdownMenuItem(
-                value: building.id + room,
-                child: Text(building.id + room),
+                value: building.id + " " + room,
+                child: Text(building.id + " " + room),
               ));
               buildRooms.add(toAdd);
             }
