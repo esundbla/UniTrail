@@ -1,28 +1,39 @@
+import 'package:unitrail/views/welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:unitrail/BackEndTesting/Testing.dart';
 import 'firebase_options.dart';
+import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
+import 'package:sizer/sizer.dart';
+import 'package:device_preview/device_preview.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( const MyApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
+  runApp(
+     DevicePreview(
+      enabled: true,
+      builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'UniTrail',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const BackendTesting(),
-    );
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        title: 'UniTrail',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: DefaultBottomBarController(child: Welcome()),
+      );
+    });
   }
 }
