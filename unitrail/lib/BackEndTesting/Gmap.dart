@@ -11,7 +11,10 @@ class GMapTest extends StatefulWidget {
 class _GMapTest extends State<GMapTest> {
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final LatLng _center = const LatLng(39.7439, -105.0047);
+  final LatLng aes = const LatLng(39.74506, -105.0088116);
+  final LatLng tivoli = const LatLng(39.745019, -105.006413);
+
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -33,7 +36,18 @@ class _GMapTest extends State<GMapTest> {
                 onMapCreated: _onMapCreated,
                 initialCameraPosition: CameraPosition(
                   target: _center,
-                  zoom: 11.0,
-                ))));
+                  zoom: 15.0,
+                ),
+                markers: {
+                  Marker(
+                    markerId: MarkerId("Current"),
+                    position: aes,
+                  ),
+                  Marker(
+                    markerId: MarkerId("Destination"),
+                    position: tivoli,
+                  )
+
+                },)));
   }
 }
