@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/text_field.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
@@ -5,14 +6,18 @@ import 'package:unitrail/views/home.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'Components/tile.dart';
 
-class LoginPage extends StatelessWidget {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-  void saveInformation() {
-    print(emailController.text);
-    print(passwordController.text);
-  }
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  // hold the input email and password from register
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,6 @@ class LoginPage extends StatelessWidget {
             ],
           ),
           Divider(height: 200),
-
           Textfield(
               controller: emailController,
               hintText: 'Email',
@@ -51,11 +55,21 @@ class LoginPage extends StatelessWidget {
           MyButton(
             title: 'Login',
             color: Colors.white,
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return MaterialApp(
-                    home: DefaultBottomBarController(child: HomeScreen()));
-              }));
+            onPressed: () async {
+              await FirebaseAuth.instance
+                  .signInWithEmailAndPassword(
+                      email: emailController.text,
+                      password: passwordController.text)
+                  .then((value) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return HomeScreen();
+                  },
+                ),
+              );
+              });
             },
           )
         ],

@@ -23,6 +23,7 @@ dependencies:
   cloud_firestore: ^4.4.2
   dropdown_search: ^5.0.5
   search_choices: ^2.2.2
+  firebase_auth: ^4.2.9
 
 dev_dependencies:
   flutter_test:
