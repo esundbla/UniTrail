@@ -17,39 +17,37 @@ public class PreviewPath : MonoBehaviour
     {
         path = new NavMeshPath();
         line = transform.GetComponent<LineRenderer>();
-        SetNagivationTarget("AES_285","AES_310");
+        // SetNagivationTarget("AES_285","AES_237");
+        // string[] test = {"AES_285","AES_237"};
+        // SetNagivationTarget(test);
+        startTarget = GameObject.Find("AES_210");
+        endTarget = GameObject.Find("AES_285");
+        
 
-        NavMesh.CalculatePath(startTarget.transform.position, endTarget.transform.position, NavMesh.AllAreas, path);
-        // RenderPath(path.corners);
         // save varibles for nagivate scene
-        PlayerPrefs.SetString("start", startTarget.name);
-        PlayerPrefs.SetString("end", endTarget.name);
-        int previewSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        PlayerPrefs.SetInt("previousSceneIndex", previewSceneIndex);
+        // PlayerPrefs.SetString("start", startTarget.name);
+        // PlayerPrefs.SetString("end", endTarget.name);
+        // int previewSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        // PlayerPrefs.SetInt("previousSceneIndex", previewSceneIndex);
         
     }
 
     void Update()
     {
-       
+        NavMesh.CalculatePath(startTarget.transform.position, endTarget.transform.position, NavMesh.AllAreas, path);
         
         line.positionCount = path.corners.Length;
         line.SetPositions(path.corners);
     }
-    public void SetNagivationTarget(string start, string end){
+    public void SetNavigationTarget(string start){
         // Find object name
+        Debug.Log("Start");
+        Debug.Log(start);
         startTarget = GameObject.Find(start);
-        endTarget = GameObject.Find(end);
+        // endTarget = GameObject.Find("AES_285");
+        Debug.Log("End");
     }
-    private void RenderPath(Vector3[] corners){
-        for (int i = 0; i< corners.Length -1; i ++){
-            LineRenderer pathrender = Instantiate(line,transform);
-            pathrender.positionCount = 2;
-            pathrender.SetPosition(0,corners[i]);
-            pathrender.SetPosition(1,corners[i+1]);
-            Debug.Log(i);
-        }
-    }
+    
 
 
 }

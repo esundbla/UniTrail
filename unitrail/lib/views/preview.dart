@@ -1,50 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'components/rounded_button.dart';
 
 class UnityDemoScreen extends StatefulWidget {
+  // const UnityDemoScreen({Key? key}) : super(key: key);
+  final String start;
+  final String end;
 
-  const UnityDemoScreen({Key? key}) : super(key: key);
+  UnityDemoScreen({
+    required this.start,
+    required this.end,
+  });
 
   @override
   _UnityDemoScreenState createState() => _UnityDemoScreenState();
 }
 
-class _UnityDemoScreenState extends State<UnityDemoScreen>{
+class _UnityDemoScreenState extends State<UnityDemoScreen> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
   late UnityWidgetController _unityWidgetController;
-  @override
-  void initState() {
-    super.initState();
-    setNavigationTarget("","");
-  }
 
+//   @override
+//   void initState() {
+//     super.initState();
+//     WidgetsBinding.instance.addPostFrameCallback((_) {
+//       print("WidgetsBinding");
+//       setNavigationTarget();
+//     });
+//     SchedulerBinding.instance.addPostFrameCallback((_) {
+//   print("SchedulerBinding");
+//   setNavigationTarget();
+// });
+//   }
+  // Communcation from Flutter to Unity
+  void setNavigationTarget() {
+    _unityWidgetController.postMessage(
+        "PathRenderer", "SetNavigationTarget", "AES_237");
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      key: _scaffoldKey,
-      body: SafeArea(
-        bottom: false,
+        key: _scaffoldKey,
+        body: SafeArea(
+          bottom: false,
           child: Container(
             color: Colors.amber,
-            child: UnityWidget(
-              onUnityCreated: onUnityCreated,
-            ),
+            child: Stack(children: <Widget>[
+              UnityWidget(
+                onUnityCreated: onUnityCreated,
+              ),
+              TextButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue),
+                ),
+                onPressed: () {
+                  setNavigationTarget();
+                },
+                child: Text('TextButton'),
+              )
+            ]),
           ),
-        ),
-    );
+        ));
   }
-  // Communcation from Flutter to Unity
-  void setNavigationTarget(String startLocation,String endLocation) async {
-    await _unityWidgetController.postMessage(
-      'PathRenderer',
-      'SetNagivationTarget',
-      {startLocation,endLocation}
-      
-    );
-  }
+
   // Callback that connects the created controller to the unity controller
   void onUnityCreated(controller) {
     _unityWidgetController = controller;
