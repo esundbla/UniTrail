@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/text_field.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
-
 import 'Components/tile.dart';
+import 'Widgets/back_button.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final firstNameController = TextEditingController();
+
   final lastNameController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final emailController = TextEditingController();
 
   void saveInformation() {
@@ -28,11 +36,15 @@ class SignUpPage extends StatelessWidget {
             ),
       ),
       child: Column(
+        
         children: [
           Divider(height: 60),
-          Column(
+          Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(width: 8),
+              MyBackButton(),
+              SizedBox(width: 50),
               Tile(imagePath: 'assets/images/Logo1.png'),
             ],
           ),
