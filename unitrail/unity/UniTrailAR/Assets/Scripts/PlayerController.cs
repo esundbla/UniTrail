@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player start...");
         agent = GetComponent<NavMeshAgent>();
         line = GetComponent<LineRenderer>();
-        target = GameObject.Find("AES_Room_285").transform;
+        target = GameObject.Find(PlayerPrefs.GetString("end")).transform;
         agent.SetDestination(target.position);
     }
 
