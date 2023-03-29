@@ -130,10 +130,13 @@ class _Go extends State<Go> {
             press: () {
 
                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return UnityDemoScreen();
-                }));
+                  return UnityDemoScreen(start:"AES_210",end:"AES_285");
+                },
+                ));
             },
           ),
         ])));
   }
 }
+
+

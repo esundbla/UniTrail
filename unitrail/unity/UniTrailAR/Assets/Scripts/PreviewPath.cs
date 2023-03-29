@@ -8,34 +8,45 @@ public class PreviewPath : MonoBehaviour
 {
     private NavMeshPath path;
     private LineRenderer line;
-    public GameObject start;
-    public GameObject navTargetObject;
+    private GameObject startTarget;
+    private GameObject endTarget;
     private Vector3 lineHeightStart;
     private Vector3 lineHeightDestination;
     void Start()
     {
         path = new NavMeshPath();
         line = transform.GetComponent<LineRenderer>();
-        lineHeightStart = new Vector3(start.transform.position.x,start.transform.position.y + 1.5f,start.transform.position.z);
-        lineHeightDestination = new Vector3(navTargetObject.transform.position.x,navTargetObject.transform.position.y + 1.5f,navTargetObject.transform.position.z);
-        PlayerPrefs.SetString("start", start.name);
-        PlayerPrefs.SetString("end", navTargetObject.name);
-        int previewSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        PlayerPrefs.SetInt("previousSceneIndex", previewSceneIndex);
+        // SetNagivationTarget("AES_285","AES_237");
+        // string[] test = {"AES_285","AES_237"};
+        // SetNagivationTarget(test);
+        startTarget = GameObject.Find("AES_210");
+        endTarget = GameObject.Find("AES_285");
+        
+
+        // save varibles for nagivate scene
+        // PlayerPrefs.SetString("start", startTarget.name);
+        // PlayerPrefs.SetString("end", endTarget.name);
+        // int previewSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        // PlayerPrefs.SetInt("previousSceneIndex", previewSceneIndex);
+        
     }
 
     void Update()
     {
-       
-        NavMesh.CalculatePath(lineHeightStart, lineHeightDestination, NavMesh.AllAreas, path);
+        NavMesh.CalculatePath(startTarget.transform.position, endTarget.transform.position, NavMesh.AllAreas, path);
+        
         line.positionCount = path.corners.Length;
         line.SetPositions(path.corners);
-        line.enabled = true;
     }
-    public void SetNagivationTarget(string start, string end){
+    public void SetNavigationTarget(string start){
         // Find object name
-
+        Debug.Log("Start");
+        Debug.Log(start);
+        startTarget = GameObject.Find(start);
+        // endTarget = GameObject.Find("AES_285");
+        Debug.Log("End");
     }
+    
 
 
 }

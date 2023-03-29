@@ -148,7 +148,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
                       child: Text("Navigate"),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return UnityDemoScreen();
+                          return UnityDemoScreen(start:"",end:"");
                         }));
                       },
                       style: ElevatedButton.styleFrom(
