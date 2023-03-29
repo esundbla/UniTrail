@@ -13,7 +13,7 @@ class Tile extends StatelessWidget{
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(12),
-        color: Color.fromARGB(255, 153, 97, 93)
+        color: Colors.white
       ),
       height: 40,
       child: Image.asset(imagePath),

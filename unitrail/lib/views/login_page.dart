@@ -4,7 +4,7 @@ import 'package:unitrail/views/Widgets/my_button.dart';
 import 'package:unitrail/views/home.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'Components/tile.dart';
-
+import 'Widgets/back_button.dart';
 class LoginPage extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -27,10 +27,13 @@ class LoginPage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Divider(height: 60),
-          Column(
+          Divider(height: 50),
+          Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(width: 8),
+              MyBackButton(),
+              SizedBox(width: 50),
               Tile(imagePath: 'assets/images/Logo1.png'),
             ],
           ),
@@ -57,7 +60,7 @@ class LoginPage extends StatelessWidget {
                     home: DefaultBottomBarController(child: HomeScreen()));
               }));
             },
-          )
+          ),
         ],
       ),
     );

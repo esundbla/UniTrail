@@ -14,7 +14,9 @@ class Welcome extends StatelessWidget {
         image: DecorationImage(
             image: AssetImage('assets/images/Tiv.jpg'),
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)),
+            opacity: 0.7
+            //colorFilter: ColorFilter.mode(Colors.white, BlendMode.d)
+            ),
       ),
       child: Column(
         children: [
@@ -27,7 +29,7 @@ class Welcome extends StatelessWidget {
           ),
           Divider(height: 300),
           Text(
-            "Welcome!",
+            "Welcome Back!",
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -56,15 +58,30 @@ class Welcome extends StatelessWidget {
               }));
             },
           ),
-          Divider(height: 10),
-          MyButton(
-              title: 'Register',
-              color: Colors.white,
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return SignUpPage();
-                }));
-              }),
+        
+          TextButton.icon(
+            // style: TextButton.styleFrom(
+            //   foregroundColor: Colors.white,
+            //   textStyle: const TextStyle(fontSize: 20, fontStyle: FontStyle.italic)
+              
+            // ),
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
+              textStyle: const TextStyle(fontSize: 18, fontStyle: FontStyle.italic)
+            ),
+            label: const Text("Don't have an account? Register!"),
+            icon: const Icon(Icons.arrow_forward_ios),
+            onPressed: (){}, 
+            //child: Text("Don't have an account yet? Register!")
+            ),
+          // MyButton(
+          //     title: 'Register',
+          //     color: Colors.white,
+          //     onPressed: () {
+          //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //         return SignUpPage();
+          //       }));
+          //     }),
         ],
       ),
     );
