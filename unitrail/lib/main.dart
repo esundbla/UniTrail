@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          //home: DefaultBottomBarController(child: Welcome()));
-          home: DefaultBottomBarController(child: GMapTest()));
+          home: DefaultBottomBarController(child: Welcome()));
+          //home: DefaultBottomBarController(child: GMapTest()));
     });
   }
 }

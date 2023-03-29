@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:unitrail/views/Components/Building_LatLng.dart';
 
-final X011 = "AIzaSyDZAM1_YKEux_XQ6rcP7XPgcb-o_YBlVjs";
+final X011 = "AIzaSyA_Vo63tEnW8Fd5AMqx9NjqWTOXef8Cc1k";
 
 class GMapTest extends StatefulWidget {
   const GMapTest({super.key});
@@ -110,10 +110,6 @@ class _GMapTest extends State<GMapTest> {
                         markerId: const MarkerId("Current"),
                         position: LatLng(
                             currentLoc!.latitude!, currentLoc!.longitude!),
-                      ),
-                      Marker(
-                        markerId: MarkerId("Origin"),
-                        position: origin,
                       ),
                       Marker(
                         markerId: MarkerId("Destination"),
