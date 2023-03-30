@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+using FlutterUnityIntegration;
+
+
 public class PreviewPath : MonoBehaviour
 {
     private NavMeshPath path;
@@ -12,16 +15,11 @@ public class PreviewPath : MonoBehaviour
     private GameObject endTarget;
     private Vector3 lineHeightStart;
     private Vector3 lineHeightDestination;
+    private bool sceneFullyLoaded = false;
     void Start()
     {
         path = new NavMeshPath();
         line = transform.GetComponent<LineRenderer>();
-        // SetNagivationTarget("AES_285","AES_237");
-        // string[] test = {"AES_285","AES_237"};
-        // SetNagivationTarget(test);
-        startTarget = GameObject.Find("AES_210");
-        endTarget = GameObject.Find("AES_285");
-        
 
         // save varibles for nagivate scene
         // PlayerPrefs.SetString("start", startTarget.name);
@@ -33,20 +31,35 @@ public class PreviewPath : MonoBehaviour
 
     void Update()
     {
-        NavMesh.CalculatePath(startTarget.transform.position, endTarget.transform.position, NavMesh.AllAreas, path);
+         if (SceneManager.GetActiveScene().isLoaded) //&& !sceneFullyLoaded)
+        {
+            // Debug.Log("Scene fully loaded.");
+            // UnityMessageManager.Instance.SendMessageToFlutter("Preview Scene is fully loaded");
+            // sceneFullyLoaded = true;
+
+            if (startTarget != null && endTarget != null){
+            
+            NavMesh.CalculatePath(startTarget.transform.position, endTarget.transform.position, NavMesh.AllAreas, path);
+            line.positionCount = path.corners.Length;
+            line.SetPositions(path.corners);
+            }
+            else{
+                UnityMessageManager.Instance.SendMessageToFlutter("Display Path");
+            }
+        }
         
-        line.positionCount = path.corners.Length;
-        line.SetPositions(path.corners);
+        
     }
-    public void SetNavigationTarget(string start){
+    public void SetStartNavigationTarget(string start){
         // Find object name
-        Debug.Log("Start");
-        Debug.Log(start);
         startTarget = GameObject.Find(start);
-        // endTarget = GameObject.Find("AES_285");
-        Debug.Log("End");
+        
     }
-    
+    public void SetEndNavigationTarget(string end){
+        // Find object name
+        endTarget = GameObject.Find(end);
+        
+    }
 
 
 }

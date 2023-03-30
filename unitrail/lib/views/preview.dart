@@ -22,22 +22,12 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
       GlobalKey<ScaffoldState>();
   late UnityWidgetController _unityWidgetController;
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     WidgetsBinding.instance.addPostFrameCallback((_) {
-//       print("WidgetsBinding");
-//       setNavigationTarget();
-//     });
-//     SchedulerBinding.instance.addPostFrameCallback((_) {
-//   print("SchedulerBinding");
-//   setNavigationTarget();
-// });
-//   }
   // Communcation from Flutter to Unity
   void setNavigationTarget() {
     _unityWidgetController.postMessage(
-        "PathRenderer", "SetNavigationTarget", "AES_237");
+        "PathRenderer", "SetStartNavigationTarget", widget.start);
+    _unityWidgetController.postMessage(
+        "PathRenderer", "SetEndNavigationTarget", widget.end);
   }
 
   @override
@@ -51,17 +41,8 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
             child: Stack(children: <Widget>[
               UnityWidget(
                 onUnityCreated: onUnityCreated,
+                onUnityMessage: onUnityMessage,
               ),
-              TextButton(
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
-                ),
-                onPressed: () {
-                  setNavigationTarget();
-                },
-                child: Text('TextButton'),
-              )
             ]),
           ),
         ));
@@ -70,5 +51,15 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
   // Callback that connects the created controller to the unity controller
   void onUnityCreated(controller) {
     _unityWidgetController = controller;
+  }
+
+  // Communication from Unity to Flutter
+  void onUnityMessage(message) {
+    if (message == "Display Path") {
+      setNavigationTarget();
+    }
+    else {
+      print('Received message from unity: ${message.toString()}');
+    }
   }
 }
