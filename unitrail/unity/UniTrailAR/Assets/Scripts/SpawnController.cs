@@ -13,11 +13,15 @@ public class SpawnController : MonoBehaviour
     private Transform spawnPoint;
     private Transform target;
     private Transform xrOrigin;
+    private string start;
+    private string end;
 
     // called zero
     void Awake()
     {
         Debug.Log("Awake");
+        start = PlayerPrefs.GetString("start");
+        end = PlayerPrefs.GetString("end");
     }
 
     // called first
@@ -32,8 +36,8 @@ public class SpawnController : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
-        spawnPoint = GameObject.Find("AES_Room_237").transform;
-        target = GameObject.Find("AES_Room_285").transform;
+        spawnPoint = GameObject.Find(start).transform;
+        target = GameObject.Find(end).transform;
         xrOrigin = GameObject.Find("XR Origin").transform;
 
         // if (player != null)
