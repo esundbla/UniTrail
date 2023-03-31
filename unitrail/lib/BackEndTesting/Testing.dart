@@ -22,17 +22,24 @@ class _BackendTestingState extends State<BackendTesting> {
     Future<List<DropdownMenuItem<String>>> readData() async {
       CollectionReference buildings =
           FirebaseFirestore.instance.collection("Buildings");
+      //print(buildings.get());
       //Secondary function to assure async executiong
       Future<List<DropdownMenuItem<String>>> db_call() async {
         //get list of buldings
-        var buildSnap = await buildings.get();
-        //Buildrooms is the final list object we aggregate for the search_choice widget
         List<DropdownMenuItem<String>> buildRooms = [];
+        var buildSnap = await buildings.get();
+        //print(buildSnap);
+        //print("got buildsnap");
+        //Buildrooms is the final list object we aggregate for the search_choice widget
         //For all buildings
+        //print(buildSnap.docs);
         for (var building in buildSnap.docs) {
+          //print(building);
           var floorsnap =
               await buildings.doc(building.id).collection("Floors").get();
           //For every floor on current building
+          //print(floorsnap);
+          //print("got floorsnap");
           for (var floor in floorsnap.docs) {
             //print(floor.id);
             var roomsnap = await buildings
@@ -48,6 +55,7 @@ class _BackendTestingState extends State<BackendTesting> {
             //For every room on given floor
             for (var room in data.keys) {
               //create dropDownMenuItem with string of "building" + "room #"
+              //print("all the way here");
               var toAdd = await (DropdownMenuItem(
                 value: building.id + room,
                 child: Text(building.id + room),
