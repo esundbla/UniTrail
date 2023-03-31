@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/text_field.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:unitrail/views/login_page.dart';
 import 'Components/tile.dart';
+import 'Widgets/back_button.dart';
 
-class SignUpPage extends StatelessWidget {
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final passwordController = TextEditingController();
-  final emailController = TextEditingController();
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   void saveInformation() {
     print(firstNameController.text);
@@ -18,25 +26,31 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage('assets/images/Tiv.jpg'),
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
+            opacity: 0.15
             //colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
             ),
       ),
       child: Column(
+        
         children: [
-          Divider(height: 60),
-          Column(
+          SizedBox(height: 30,),
+          Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(width: 8),
+              MyBackButton(),
+              SizedBox(width: 50),
               Tile(imagePath: 'assets/images/Logo1.png'),
             ],
           ),
-          Divider(height: 200),
+          SizedBox(height: 100,),
           Textfield(
               controller: firstNameController,
               hintText: 'First Name',
@@ -57,12 +71,43 @@ class SignUpPage extends StatelessWidget {
           Textfield(
             controller: passwordController,
             hintText: 'Enter Password',
-            obscureText: false,
+            obscureText: true,
             icon: Icon(Icons.password),
           ),
-          MyButton(title: 'Sign Up', color: Colors.white, onPressed: null)
+          SizedBox(height: 10,),
+          MyButton(
+              title: 'Sign Up',
+              color: Colors.white,
+              onPressed: () async {
+                FirebaseAuth.instance
+                    .createUserWithEmailAndPassword(
+                        email: emailController.text,
+                        password: passwordController.text)
+                    .then((value) {
+                FirebaseFirestore.instance
+                  .collection('Users')
+                  .doc(value.user?.uid)
+                  .set({
+                    "email": value.user?.email,
+                    "firstName": firstNameController.text,
+                    "lastName": lastNameController.text,
+                    "studentID": "",
+                    "classes": {},
+                    "navigations": {},
+                    });
+                    });
+                Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return LoginPage();
+                  },
+                ),
+              );
+            })
         ],
       ),
+      )
     );
   }
 }

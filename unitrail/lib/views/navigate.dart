@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:sizer/sizer.dart';
+import 'package:unitrail/views/gmap_overworld.dart';
 import 'package:unitrail/views/preview.dart';
 
 class NavigateScreen extends StatefulWidget {
@@ -49,7 +50,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
             for (var room in data.keys) {
               //create dropDownMenuItem with string of "building" + "room #"
               var toAdd = await (DropdownMenuItem(
-                value: building.id + "_" + room,
+                value: building.id + " " + room,
                 child: Text(building.id + " " + room),
               ));
               buildRooms.add(toAdd);
@@ -131,25 +132,23 @@ class _NavigateScreenState extends State<NavigateScreen> {
                     isExpanded: true,
                   ),
                   ElevatedButton(
-                    // ignore: sort_child_properties_last
-                    child: Text("Navigate"),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        print(start);
-                        print(dest);
-                        return UnityDemoScreen(start: start, end: dest);
-                      }));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size.fromWidth(50.w),
-                      backgroundColor: const Color(0xff78c091),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                    ),
-                  ),
-                ]),
-          ),
-        ));
+                      // ignore: sort_child_properties_last
+                      child: Text("Navigate"),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          if (start.split(' ')[0] == dest.split(' ')[0]) {
+                            return UnityDemoScreen(start: start, end: dest);
+                          } else {
+                            return GMap(X0: start, X1: dest);
+                          }
+                        }));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size.fromWidth(50.w),
+                          backgroundColor: Color.fromARGB(178, 13, 217, 84),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)))),
+                ]))));
   }
 }
