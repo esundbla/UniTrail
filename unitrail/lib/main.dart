@@ -15,9 +15,11 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(DevicePreview(enabled: false, builder: (context) => MyApp()));
+
 }
 
 class MyApp extends StatelessWidget {
