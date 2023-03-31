@@ -1,50 +1,39 @@
+import 'package:unitrail/views/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
+import 'package:sizer/sizer.dart';
+import 'package:device_preview/device_preview.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: UnityDemoScreen()
-  ));
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
+  runApp(
+     DevicePreview(
+      enabled: true,
+      builder: (context) => MyApp()));
 }
 
-class UnityDemoScreen extends StatefulWidget {
-
-  UnityDemoScreen({Key? key}) : super(key: key);
-
+class MyApp extends StatelessWidget {
   @override
-  _UnityDemoScreenState createState() => _UnityDemoScreenState();
-}
-
-class _UnityDemoScreenState extends State<UnityDemoScreen>{
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
-  late UnityWidgetController _unityWidgetController;
-
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(title: Text("Hi")),
-      key: _scaffoldKey,
-      body: SafeArea(
-        bottom: false,
-          child: Container(
-            color: Colors.amber,
-            child: UnityWidget(
-              onUnityCreated: onUnityCreated,
-              onUnityMessage: onUnityMessage,
-            ),
-          ),
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        title: 'UniTrail',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
         ),
-
-    );
-  }
-
-  // Callback that connects the created controller to the unity controller
-  void onUnityCreated(controller) {
-    this._unityWidgetController = controller;
-  }
-  void onUnityMessage(message) {
-    print('Received message from unity: ${message.toString()}');
+        home: DefaultBottomBarController(child: Welcome()),
+      );
+    });
   }
 }
