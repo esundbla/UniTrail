@@ -21,8 +21,8 @@ public class SpawnControllerTEST : MonoBehaviour
     void Awake()
     {
         Debug.Log("Awake");
-        PlayerPrefs.SetString("start", "AES_237");
-        PlayerPrefs.SetString("end", "AES_195");
+        // PlayerPrefs.SetString("start", "AES_237");
+        // PlayerPrefs.SetString("end", "AES_195");
         PlayerPrefs.SetString("currentFloor", "2");
         start = PlayerPrefs.GetString("start");
         end = PlayerPrefs.GetString("end");

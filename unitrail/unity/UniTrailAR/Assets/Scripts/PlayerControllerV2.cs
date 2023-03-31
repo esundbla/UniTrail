@@ -8,16 +8,13 @@ using UnityEngine.AI;
 
 public class PlayerControllerV2 : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public ARCameraManager arCameraManager;
 
     // Update is called once per frame
     void Update()
     {
-
+        Transform cameraTransform = arCameraManager.GetComponent<Camera>().transform;
+        Quaternion cameraRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
+        transform.rotation = cameraRotation;
     }
 }

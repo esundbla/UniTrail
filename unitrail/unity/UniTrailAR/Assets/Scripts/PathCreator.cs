@@ -18,8 +18,10 @@ public class PathCreator : MonoBehaviour
     void Start()
     {
         // navMeshPath = new NavMeshPath();
-        // startTarget = GameObject.Find("AES_180");
-        // endTarget = GameObject.Find("AES_237");
+        startTarget = GameObject.Find("AES_225");
+        endTarget = GameObject.Find("AES_165");
+        PlayerPrefs.SetString("start", startTarget.name);
+        PlayerPrefs.SetString("end", endTarget.name);
     }
 
     void Update()
