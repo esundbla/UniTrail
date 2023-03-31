@@ -1,4 +1,7 @@
+import 'package:unitrail/BackEndTesting/Gmap.dart';
+import 'package:unitrail/BackEndTesting/calandar.dart';
 import 'package:unitrail/views/welcome.dart';
+import 'package:unitrail/BackEndTesting/Testing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,14 +15,9 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
-  runApp(
-     DevicePreview(
-      enabled: true,
-      builder: (context) => MyApp()));
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(DevicePreview(enabled: false, builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -27,13 +25,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
-        title: 'UniTrail',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: DefaultBottomBarController(child: Welcome()),
-      );
+          title: 'UniTrail',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: DefaultBottomBarController(child: Welcome()));
+          //home: DefaultBottomBarController(child: CalApp()));
     });
   }
 }
