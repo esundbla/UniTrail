@@ -33,6 +33,8 @@ dependencies:
   requests: ^4.7.0
   icalendar_parser: ^1.1.1
   syncfusion_flutter_calendar: ^21.1.37
+  firebase_auth: ^4.2.9
+
 
 dev_dependencies:
   flutter_test:
