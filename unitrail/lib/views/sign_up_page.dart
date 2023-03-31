@@ -26,19 +26,21 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage('assets/images/Tiv.jpg'),
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
+            opacity: 0.15
             //colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
             ),
       ),
       child: Column(
         
         children: [
-          Divider(height: 60),
+          SizedBox(height: 30,),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -48,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Tile(imagePath: 'assets/images/Logo1.png'),
             ],
           ),
-          Divider(height: 200),
+          SizedBox(height: 100,),
           Textfield(
               controller: firstNameController,
               hintText: 'First Name',
@@ -69,12 +71,14 @@ class _SignUpPageState extends State<SignUpPage> {
           Textfield(
             controller: passwordController,
             hintText: 'Enter Password',
-            obscureText: false,
+            obscureText: true,
             icon: Icon(Icons.password),
           ),
+          SizedBox(height: 10,),
           MyButton(title: 'Sign Up', color: Colors.white, onPressed: null)
         ],
       ),
+      )
     );
   }
 }
