@@ -50,3 +50,4 @@ app.*.map.json
 # Google API keys
 ios/Runner/GoogleService-Info.plist
 macos/Runner/GoogleService-Info.plist
+
