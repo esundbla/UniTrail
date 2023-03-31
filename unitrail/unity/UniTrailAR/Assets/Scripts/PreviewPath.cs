@@ -20,8 +20,6 @@ public class PreviewPath : MonoBehaviour
         line = transform.GetComponent<LineRenderer>();
 
         // save varibles for nagivate scene
-        // PlayerPrefs.SetString("start", startTarget.name);
-        // PlayerPrefs.SetString("end", endTarget.name);
         // int previewSceneIndex = SceneManager.GetActiveScene().buildIndex;
         // PlayerPrefs.SetInt("previousSceneIndex", previewSceneIndex);
         
@@ -29,11 +27,11 @@ public class PreviewPath : MonoBehaviour
 
     void Update()
     {
-         if (SceneManager.GetActiveScene().isLoaded) //&& !sceneFullyLoaded)
+         if (SceneManager.GetActiveScene().isLoaded && !sceneFullyLoaded)
         {
             // Debug.Log("Scene fully loaded.");
             // UnityMessageManager.Instance.SendMessageToFlutter("Preview Scene is fully loaded");
-            // sceneFullyLoaded = true;
+            sceneFullyLoaded = true;
 
             if (startTarget != null && endTarget != null){
             
@@ -50,12 +48,14 @@ public class PreviewPath : MonoBehaviour
     }
     public void SetStartNavigationTarget(string start){
         // Find object name
-        startTarget = GameObject.Find(start);
+        // startTarget = GameObject.Find(s);
+        PlayerPrefs.SetString("start", startTarget.name);
         
     }
     public void SetEndNavigationTarget(string end){
         // Find object name
         endTarget = GameObject.Find(end);
+        PlayerPrefs.SetString("end", endTarget.name);
         
     }
 

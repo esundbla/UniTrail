@@ -51,14 +51,14 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
   // Callback that connects the created controller to the unity controller
   void onUnityCreated(controller) {
     _unityWidgetController = controller;
+    
   }
 
   // Communication from Unity to Flutter
   void onUnityMessage(message) {
     if (message == "Display Path") {
       setNavigationTarget();
-    }
-    else {
+    } else {
       print('Received message from unity: ${message.toString()}');
     }
   }

@@ -49,8 +49,8 @@ class _NavigateScreenState extends State<NavigateScreen> {
             for (var room in data.keys) {
               //create dropDownMenuItem with string of "building" + "room #"
               var toAdd = await (DropdownMenuItem(
-                value: building.id + room,
-                child: Text(building.id + room),
+                value: building.id + "_" + room,
+                child: Text(building.id + " " + room),
               ));
               buildRooms.add(toAdd);
             }
@@ -80,13 +80,13 @@ class _NavigateScreenState extends State<NavigateScreen> {
             backgroundColor: const Color(0xFFa31621),
             actions: []),
         body: Padding(
-            padding: EdgeInsets.fromLTRB(7.w, 4.h, 7.w, 4.h),
-            child: Center(
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
+          padding: EdgeInsets.fromLTRB(7.w, 4.h, 7.w, 4.h),
+          child: Center(
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
 
-                    //Widget list for given page.
-                    children: <Widget>[
+                //Widget list for given page.
+                children: <Widget>[
                   Text("Begining"),
 
                   //Future Builder for start location searchChoices
@@ -131,18 +131,25 @@ class _NavigateScreenState extends State<NavigateScreen> {
                     isExpanded: true,
                   ),
                   ElevatedButton(
-                      // ignore: sort_child_properties_last
-                      child: Text("Navigate"),
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return UnityDemoScreen(start:start,end:dest);
-                        }));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: Size.fromWidth(50.w),
-                          backgroundColor: const Color(0xff78c091),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)))),
-                ]))));
+                    // ignore: sort_child_properties_last
+                    child: Text("Navigate"),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        print(start);
+                        print(dest);
+                        return UnityDemoScreen(start: start, end: dest);
+                      }));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size.fromWidth(50.w),
+                      backgroundColor: const Color(0xff78c091),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  ),
+                ]),
+          ),
+        ));
   }
 }
