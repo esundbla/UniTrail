@@ -28,6 +28,11 @@ dependencies:
   dropdown_search: ^5.0.5
   search_choices: ^2.2.2
   google_maps_flutter: ^2.2.4
+  simple_gesture_detector: ^0.2.0
+  table_calendar: ^3.0.8
+  requests: ^4.7.0
+  icalendar_parser: ^1.1.1
+  syncfusion_flutter_calendar: ^21.1.37
 
 dev_dependencies:
   flutter_test:

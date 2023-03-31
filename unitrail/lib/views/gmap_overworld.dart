@@ -34,8 +34,8 @@ class _GMap extends State<GMap> {
   LocationData? currentLoc;
 
   void getCurrentLocation() async {
-    LatLng origin = buildingLL[widget.X0.split("_")[0]]!;
-    LatLng dest = buildingLL[widget.X1.split("_")[0]]!;
+    LatLng origin = buildingLL[widget.X0.split(" ")[0]]!;
+    LatLng dest = buildingLL[widget.X1.split(" ")[0]]!;
     Location loc = Location();
 
     loc.getLocation().then((value) => currentLoc = value);
@@ -44,7 +44,11 @@ class _GMap extends State<GMap> {
     gMapCont.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         zoom: 18.2,
         target: LatLng(currentLoc!.latitude!, currentLoc!.longitude!))));
+  }
 
+  void updateLocation() {
+    LatLng dest = buildingLL[widget.X1.split(" ")[0]]!;
+    Location loc = Location();
     loc.onLocationChanged.listen((event) async {
       currentLoc = event;
       await getPolyPoints(
@@ -108,13 +112,14 @@ class _GMap extends State<GMap> {
 
   @override
   void initState() {
-    LatLng origin = buildingLL[widget.X0.split("_")[0]]!;
-    LatLng dest = buildingLL[widget.X1.split("_")[0]]!;
+    LatLng origin = buildingLL[widget.X0.split(" ")[0]]!;
+    LatLng dest = buildingLL[widget.X1.split(" ")[0]]!;
     getCurrentLocation();
     addCustomIcon1();
     addCustomIcon2();
     getPolyPoints(origin, dest);
     super.initState();
+    updateLocation();
   }
 
   @override
@@ -159,7 +164,7 @@ class _GMap extends State<GMap> {
                       ),
                       Marker(
                         markerId: MarkerId("Destination"),
-                        position: buildingLL[widget.X1.split("_")[0]]!,
+                        position: buildingLL[widget.X1.split(" ")[0]]!,
                         icon: destIcon,
                       )
                     },
@@ -168,10 +173,10 @@ class _GMap extends State<GMap> {
               visible: reach,
               child: RoundedButton(
                 text: "Arrived at building?",
-                color: Color.fromARGB(0, 35, 20, 161),
+                color: Color.fromARGB(221, 34, 20, 161),
                 press: () {
-                  print(widget.X1.split("_")[0] + "_Entrance");
-                  print(widget.X1);
+                  print(widget.X1.split(" ")[0] + "_Entrance");
+                  print(widget.X1.replaceAll(" ", "_"));
                 },
               ),
             )));

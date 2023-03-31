@@ -1,4 +1,5 @@
 import 'package:unitrail/BackEndTesting/Gmap.dart';
+import 'package:unitrail/BackEndTesting/calandar.dart';
 import 'package:unitrail/views/welcome.dart';
 import 'package:unitrail/BackEndTesting/Testing.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ Future main() async {
   );
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(DevicePreview(enabled: true, builder: (context) => MyApp()));
+  runApp(DevicePreview(enabled: false, builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           home: DefaultBottomBarController(child: Welcome()));
-          //home: DefaultBottomBarController(child: GMapTest()));
+          //home: DefaultBottomBarController(child: CalApp()));
     });
   }
 }
