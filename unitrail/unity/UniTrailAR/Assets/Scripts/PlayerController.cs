@@ -33,14 +33,14 @@ public class PlayerController : MonoBehaviour
 
     void DrawPath()
     {
-        line.positionCount = agent.path.corners.Length;
-        transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
-        line.SetPosition(0, transform.position);
-
-        if (agent.path.corners.Length < 2)
+        if (line == null || agent.path == null || agent.path.corners.Length < 2)
         {
             return;
         }
+
+        line.positionCount = agent.path.corners.Length;
+        transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
+        line.SetPosition(0, transform.position);
 
         for (int i = 1; i < agent.path.corners.Length; i++)
         {
