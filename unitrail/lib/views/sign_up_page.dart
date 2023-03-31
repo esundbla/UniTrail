@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/text_field.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:unitrail/views/login_page.dart';
 import 'Components/tile.dart';
 import 'Widgets/back_button.dart';
 
@@ -9,14 +12,16 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
 class _SignUpPageState extends State<SignUpPage> {
-  final firstNameController = TextEditingController();
-
-  final lastNameController = TextEditingController();
-
-  final passwordController = TextEditingController();
-
-  final emailController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   void saveInformation() {
     print(firstNameController.text);
@@ -75,7 +80,36 @@ class _SignUpPageState extends State<SignUpPage> {
             icon: Icon(Icons.password),
           ),
           SizedBox(height: 10,),
-          MyButton(title: 'Sign Up', color: Colors.white, onPressed: null)
+          MyButton(
+              title: 'Sign Up',
+              color: Colors.white,
+              onPressed: () async {
+                FirebaseAuth.instance
+                    .createUserWithEmailAndPassword(
+                        email: emailController.text,
+                        password: passwordController.text)
+                    .then((value) {
+                FirebaseFirestore.instance
+                  .collection('Users')
+                  .doc(value.user?.uid)
+                  .set({
+                    "email": value.user?.email,
+                    "firstName": firstNameController.text,
+                    "lastName": lastNameController.text,
+                    "studentID": "",
+                    "classes": {},
+                    "navigations": {},
+                    });
+                    });
+                Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return LoginPage();
+                  },
+                ),
+              );
+            })
         ],
       ),
       )
