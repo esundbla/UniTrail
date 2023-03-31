@@ -11,6 +11,7 @@ import Firebase
     InitUnityIntegrationWithOptions(argc: CommandLine.argc, argv: CommandLine.unsafeArgv, launchOptions)
     FirebaseApp.configure() //add this before the code below
     GeneratedPluginRegistrant.register(with: self)
+     GMSServices.provideAPIKey("AIzaSyDZAM1_YKEux_XQ6rcP7XPgcb-o_YBlVjs")
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
