@@ -50,7 +50,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
             for (var room in data.keys) {
               //create dropDownMenuItem with string of "building" + "room #"
               var toAdd = await (DropdownMenuItem(
-                value: building.id + "_" + room,
+                value: building.id + " " + room,
                 child: Text(building.id + " " + room),
               ));
               buildRooms.add(toAdd);
@@ -137,12 +137,10 @@ class _NavigateScreenState extends State<NavigateScreen> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          if (start.split('_')[0] == dest.split('_')[0]) {
+                          if (start.split(' ')[0] == dest.split(' ')[0]) {
                             return UnityDemoScreen();
                           } else {
-                            return GMap(
-                                X0: start,
-                                X1: dest);
+                            return GMap(X0: start, X1: dest);
                           }
                         }));
                       },
