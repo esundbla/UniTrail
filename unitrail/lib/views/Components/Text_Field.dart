@@ -16,11 +16,12 @@ class Textfield extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
-      child: Material(
-        child: Center(
-          child: TextField(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: TextField(
             controller: controller,
             autocorrect: true,
             obscureText: obscureText,
@@ -34,12 +35,13 @@ class Textfield extends StatelessWidget{
               enabledBorder: OutlineInputBorder(
                 //borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(color: Colors.blue, width: 2)
+                borderRadius: BorderRadius.circular(15),
+                borderSide: BorderSide(color: Colors.blue, width: 3)
               ),
               focusedBorder: OutlineInputBorder(
                // borderRadius: BorderRadius.all(Radius.circular(18.0)),
-                borderSide: BorderSide(color: Colors.red)
+                borderSide: BorderSide(color: Colors.blue, width: 3),
+                 borderRadius: BorderRadius.circular(15)
               ),
               // border: OutlineInputBorder(
               //   borderRadius: BorderRadius.all(Radius.circular(100)),
@@ -49,9 +51,21 @@ class Textfield extends StatelessWidget{
             ),
 
           ),
-        ),
       ),
+      ]
     );
-    //throw UnimplementedError();
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: <Widget>[
+//         const Padding(
+//           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+//           child: TextField(
+//             decoration: InputDecoration(
+//               border: OutlineInputBorder(),
+//               hintText: 'Enter a search term',
+//             ),
+//           ),
+//         ),]
+//     );
   }
 }

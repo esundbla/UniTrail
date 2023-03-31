@@ -5,6 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:unitrail/views/login_page.dart';
 import 'Components/tile.dart';
+import 'Widgets/back_button.dart';
+
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -25,25 +31,31 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage('assets/images/Tiv.jpg'),
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
+            opacity: 0.15
             //colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
             ),
       ),
       child: Column(
+        
         children: [
-          Divider(height: 60),
-          Column(
+          SizedBox(height: 30,),
+          Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(width: 8),
+              MyBackButton(),
+              SizedBox(width: 50),
               Tile(imagePath: 'assets/images/Logo1.png'),
             ],
           ),
-          Divider(height: 200),
+          SizedBox(height: 100,),
           Textfield(
               controller: firstNameController,
               hintText: 'First Name',
@@ -67,6 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
             obscureText: true,
             icon: Icon(Icons.password),
           ),
+          SizedBox(height: 10,),
           MyButton(
               title: 'Sign Up',
               color: Colors.white,
@@ -96,9 +109,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                 ),
               );
-              })
+            })
         ],
       ),
+      )
     );
   }
 }
