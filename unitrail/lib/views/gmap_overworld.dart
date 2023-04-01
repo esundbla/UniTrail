@@ -188,6 +188,8 @@ class _GMap extends State<GMap> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(178, 13, 217, 84),
                   ),
-                ))));
+                ),
+              )
+                ));
   }
 }

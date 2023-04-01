@@ -43,6 +43,15 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
                 onUnityCreated: onUnityCreated,
                 onUnityMessage: onUnityMessage,
               ),
+              ElevatedButton(
+                child: Text("Arrived At Building"),
+                onPressed: () {
+                  goToAugmentedRealityScene();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(178, 13, 217, 84),
+                ),
+              ),
             ]),
           ),
         ));
@@ -51,7 +60,6 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
   // Callback that connects the created controller to the unity controller
   void onUnityCreated(controller) {
     _unityWidgetController = controller;
-    
   }
 
   // Communication from Unity to Flutter
@@ -61,5 +69,10 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
     } else {
       print('Received message from unity: ${message.toString()}');
     }
+  }
+
+  void goToAugmentedRealityScene() {
+    _unityWidgetController.postMessage(
+        'GameObject', 'ChangeScene', 'Floor2MainTest_DevF');
   }
 }

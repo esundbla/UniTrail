@@ -10,7 +10,7 @@ public class FloorTitleController : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        Vector2 titlePosition = new Vector2(Screen.width / 2, Screen.height - 150);
+        Vector2 titlePosition = new Vector2(Screen.width / 2, Screen.height - 100);
         Debug.Log(titlePosition.x + " " + titlePosition.y);
         transform.position = titlePosition;
     }
