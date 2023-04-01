@@ -1,3 +1,6 @@
+import 'package:provider/provider.dart';
+import 'package:unitrail/views/Provider/event_provider.dart';
+import 'package:unitrail/views/Widgets/utils.dart';
 import 'package:unitrail/BackEndTesting/Gmap.dart';
 import 'package:unitrail/BackEndTesting/calandar.dart';
 import 'package:unitrail/views/welcome.dart';
@@ -22,18 +25,25 @@ Future main() async {
 
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
-      return MaterialApp(
+      return ChangeNotifierProvider(
+        create: (context) => EventProvider(),
+        child: MaterialApp(
+          scaffoldMessengerKey: Utils().messengerKey,
+          navigatorKey: navigatorKey,
           title: 'UniTrail',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: DefaultBottomBarController(child: Welcome()));
-          //home: DefaultBottomBarController(child: CalApp()));
+          home: DefaultBottomBarController(child: Welcome()),
+        ),
+      );
     });
   }
 }

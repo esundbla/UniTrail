@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Textfield extends StatelessWidget{
+class Textfield extends StatelessWidget {
   final controller; // Lets us access what the user typed into the text field
   final String hintText;
   final bool obscureText;
   final Icon icon;
 
-  const Textfield({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    required this.obscureText,
-    required this.icon
-  });
+  const Textfield(
+      {super.key,
+      required this.controller,
+      required this.hintText,
+      required this.obscureText,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -54,18 +53,5 @@ class Textfield extends StatelessWidget{
       ),
       ]
     );
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: <Widget>[
-//         const Padding(
-//           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-//           child: TextField(
-//             decoration: InputDecoration(
-//               border: OutlineInputBorder(),
-//               hintText: 'Enter a search term',
-//             ),
-//           ),
-//         ),]
-//     );
   }
 }

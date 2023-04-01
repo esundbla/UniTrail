@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:unitrail/main.dart';
 import 'package:unitrail/views/Components/text_field.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
+import 'package:unitrail/views/Widgets/utils.dart';
 import 'package:unitrail/views/home.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'Components/tile.dart';
@@ -15,7 +17,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   // hold the input email and password from register
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -65,25 +66,50 @@ class _LoginPageState extends State<LoginPage> {
               height: 10,
             ),
             MyButton(
-            title: 'Login',
-            color: Colors.white,
-            onPressed: () async {
-              await FirebaseAuth.instance
-                  .signInWithEmailAndPassword(
-                      email: emailController.text,
-                      password: passwordController.text)
-                  .then((value) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return HomeScreen();
-                  },
-                ),
-              );
-              });
-              },
-            ),
+              title: 'Login',
+              color: Colors.white,
+              onPressed: () async {
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MaterialApp(
+                              home: DefaultBottomBarController(
+                                  child: HomeScreen()));
+                        },
+                      ),
+                    );
+                // showDialog(
+                //     context: context,
+                //     barrierDismissible: false,
+                //     builder: (context) =>
+                //         Center(child: CircularProgressIndicator()));
+
+                  // try {
+                //   await FirebaseAuth.instance
+                //       .signInWithEmailAndPassword(
+                //           email: emailController.text,
+                //           password: passwordController.text)
+                //       .then((value) {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) {
+                //           return MaterialApp(
+                //               home: DefaultBottomBarController(
+                //                   child: HomeScreen()));
+                //         },
+                  //       ),
+                //     );
+                //   });
+                // } on FirebaseAuthException catch (e) {
+                //   print(e);
+                //   Utils().showSnackBar(e.message);
+                // }
+
+                // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+              }),
           ],
         ),
       ),
