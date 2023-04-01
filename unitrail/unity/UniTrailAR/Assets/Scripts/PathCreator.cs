@@ -18,10 +18,10 @@ public class PathCreator : MonoBehaviour
     void Start()
     {
         // navMeshPath = new NavMeshPath();
-        startTarget = GameObject.Find("AES_225");
-        endTarget = GameObject.Find("AES_165");
-        PlayerPrefs.SetString("start", startTarget.name);
-        PlayerPrefs.SetString("end", endTarget.name);
+        // startTarget = GameObject.Find("AES_225");
+        // endTarget = GameObject.Find("AES_165");
+        // PlayerPrefs.SetString("start", startTarget.name);
+        // PlayerPrefs.SetString("end", endTarget.name);
     }
 
     void Update()
@@ -88,8 +88,6 @@ public class PathCreator : MonoBehaviour
     
     public void SetStartNavigationTarget(string start){
         // Find object name
-        Debug.Log("Helloe");
-        // startTarget = GameObject.Find("AES_180");
         startTarget = GameObject.Find(start);
         PlayerPrefs.SetString("start", startTarget.name);
         Camera mainCamera = Camera.main;
@@ -110,7 +108,6 @@ public class PathCreator : MonoBehaviour
     }
     public void SetEndNavigationTarget(string end){
         // Find object name
-        endTarget = GameObject.Find("AES_237");
         endTarget = GameObject.Find(end);
         PlayerPrefs.SetString("end", endTarget.name);
         

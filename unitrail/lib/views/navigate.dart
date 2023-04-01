@@ -138,7 +138,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           if (start.split(' ')[0] == dest.split(' ')[0]) {
-                            return UnityDemoScreen(start: start, end: dest);
+                            return UnityDemoScreen(start: start.replaceAll(" ", "_"), end: dest.replaceAll(" ", "_"));
                           } else {
                             return GMap(X0: start, X1: dest);
                           }
