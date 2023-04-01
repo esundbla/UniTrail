@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:unitrail/views/Components/Building_LatLng.dart';
 import 'package:unitrail/views/Components/rounded_button.dart';
+import 'package:unitrail/views/preview.dart';
 
 final X011 = "AIzaSyA_Vo63tEnW8Fd5AMqx9NjqWTOXef8Cc1k";
 
@@ -23,7 +24,7 @@ class _GMap extends State<GMap> {
   final Completer<GoogleMapController> _controller = Completer();
   late GoogleMapController mapController;
   var reach = false;
-  var min_dist = 0.0002;
+  var min_dist = 0.0005;
 
   LatLng _center = const LatLng(39.7439, -105.0047);
   final LatLng boxNE = const LatLng(39.746692, -105.000814);
@@ -170,15 +171,23 @@ class _GMap extends State<GMap> {
                     },
                   ),
             floatingActionButton: Visibility(
-              visible: reach,
-              child: RoundedButton(
-                text: "Arrived at building?",
-                color: Color.fromARGB(221, 34, 20, 161),
-                press: () {
-                  print(widget.X1.split(" ")[0] + "_Entrance");
-                  print(widget.X1.replaceAll(" ", "_"));
-                },
-              ),
-            )));
+                visible: reach,
+                child: ElevatedButton(
+                  child: Text("Arrived At Building"),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        //print(widget.X1.split(" ")[0] + "_Entrance");
+                        //print(widget.X1.replaceAll(" ", "_"));
+                        return UnityDemoScreen(
+                            start: widget.X1.split(" ")[0] + "_Entrance",
+                            end: widget.X1.replaceAll(" ", "_"));
+                      },
+                    ));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(178, 13, 217, 84),
+                  ),
+                ))));
   }
 }

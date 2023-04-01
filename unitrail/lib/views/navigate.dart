@@ -81,13 +81,13 @@ class _NavigateScreenState extends State<NavigateScreen> {
             backgroundColor: const Color(0xFFa31621),
             actions: []),
         body: Padding(
-            padding: EdgeInsets.fromLTRB(7.w, 4.h, 7.w, 4.h),
-            child: Center(
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
+          padding: EdgeInsets.fromLTRB(7.w, 4.h, 7.w, 4.h),
+          child: Center(
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
 
-                    //Widget list for given page.
-                    children: <Widget>[
+                //Widget list for given page.
+                children: <Widget>[
                   Text("Begining"),
 
                   //Future Builder for start location searchChoices
@@ -138,7 +138,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           if (start.split(' ')[0] == dest.split(' ')[0]) {
-                            return UnityDemoScreen();
+                            return UnityDemoScreen(start: start.replaceAll(" ", "_"), end: dest.replaceAll(" ", "_"));
                           } else {
                             return GMap(X0: start, X1: dest);
                           }
