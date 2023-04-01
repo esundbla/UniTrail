@@ -33,6 +33,7 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
         key: _scaffoldKey,
         body: SafeArea(
           bottom: false,
@@ -42,15 +43,6 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
               UnityWidget(
                 onUnityCreated: onUnityCreated,
                 onUnityMessage: onUnityMessage,
-              ),
-              ElevatedButton(
-                child: Text("Arrived At Building"),
-                onPressed: () {
-                  goToAugmentedRealityScene();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(178, 13, 217, 84),
-                ),
               ),
             ]),
           ),
@@ -71,8 +63,5 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
     }
   }
 
-  void goToAugmentedRealityScene() {
-    _unityWidgetController.postMessage(
-        'GameObject', 'ChangeScene', 'Floor2MainTest_DevF');
-  }
+ 
 }
