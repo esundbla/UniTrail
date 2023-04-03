@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:unitrail/main.dart';
 import 'package:unitrail/views/Components/text_field.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
+import 'package:unitrail/views/Widgets/utils.dart';
 import 'package:unitrail/views/home.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'Components/tile.dart';
@@ -15,10 +17,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   // hold the input email and password from register
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
                 Tile(imagePath: 'assets/images/Logo1.png'),
               ],
             ),
-
             SizedBox(
               height: 200,
             ),
@@ -65,25 +73,40 @@ class _LoginPageState extends State<LoginPage> {
               height: 10,
             ),
             MyButton(
-            title: 'Login',
-            color: Colors.white,
-            onPressed: () async {
-              await FirebaseAuth.instance
-                  .signInWithEmailAndPassword(
-                      email: emailController.text,
-                      password: passwordController.text)
-                  .then((value) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return HomeScreen();
-                  },
-                ),
-              );
-              });
-              },
-            ),
+                title: 'Login',
+                color: Colors.white,
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text)
+                        .then((value) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return MaterialApp(
+                                home: HomeScreen());
+                          },
+                        ),
+                      );
+                    });
+                  } on FirebaseAuthException catch (e) {
+                    print(e);
+                    Utils().showSnackBar(e.message);
+                  }
+                  // ignore: use_build_context_synchronously
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MaterialApp(
+                            home:  HomeScreen());
+                      },
+                    ),
+                  );
+                }),
           ],
         ),
       ),
