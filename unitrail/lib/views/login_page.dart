@@ -73,40 +73,34 @@ class _LoginPageState extends State<LoginPage> {
               height: 10,
             ),
             MyButton(
-                title: 'Login',
-                color: Colors.white,
-                onPressed: () async {
+              title: 'Login',
+              color: Colors.white,
+              onPressed: () async {
                   try {
-                    await FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text)
-                        .then((value) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MaterialApp(
-                                home: HomeScreen());
-                          },
+                  await FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text)
+                      .then((value) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MaterialApp(
+                              home: DefaultBottomBarController(
+                                  child: HomeScreen()));
+                        },
                         ),
-                      );
-                    });
-                  } on FirebaseAuthException catch (e) {
-                    print(e);
-                    Utils().showSnackBar(e.message);
-                  }
-                  // ignore: use_build_context_synchronously
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return MaterialApp(
-                            home:  HomeScreen());
-                      },
-                    ),
-                  );
-                }),
+                    );
+                  });
+                } on FirebaseAuthException catch (e) {
+                  print(e);
+                  Utils().showSnackBar(e.message);
+                }
+
+                // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+
+              }),
           ],
         ),
       ),
