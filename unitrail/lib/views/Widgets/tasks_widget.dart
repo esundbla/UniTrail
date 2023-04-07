@@ -5,6 +5,8 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:unitrail/views/Components/event_data_source.dart';
 import 'package:unitrail/views/Provider/event_provider.dart';
 
+import 'event_viewing_page.dart';
+
 class TasksWidget extends StatefulWidget {
   @override
   _TasksWidgetState createState() => _TasksWidgetState();
@@ -40,7 +42,8 @@ class _TasksWidgetState extends State<TasksWidget> {
 
         final event = details.appointments!.first;
 
-        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => EventViewingPage(event: event)));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => EventViewingPage(event: event)));
       },
     );
   }

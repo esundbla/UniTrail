@@ -69,8 +69,18 @@ class _LoginPageState extends State<LoginPage> {
               title: 'Login',
               color: Colors.white,
               onPressed: () async {
-
-                  Navigator.push(
+                    // showDialog(
+                    // context: context,
+                    // barrierDismissible: false,
+                    // builder: (context) =>
+                    //     Center(child: CircularProgressIndicator()));
+                  try {
+                  await FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text)
+                      .then((value) {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
@@ -78,37 +88,16 @@ class _LoginPageState extends State<LoginPage> {
                               home: DefaultBottomBarController(
                                   child: HomeScreen()));
                         },
-                      ),
+                        ),
                     );
-                // showDialog(
-                //     context: context,
-                //     barrierDismissible: false,
-                //     builder: (context) =>
-                //         Center(child: CircularProgressIndicator()));
-
-                  // try {
-                //   await FirebaseAuth.instance
-                //       .signInWithEmailAndPassword(
-                //           email: emailController.text,
-                //           password: passwordController.text)
-                //       .then((value) {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) {
-                //           return MaterialApp(
-                //               home: DefaultBottomBarController(
-                //                   child: HomeScreen()));
-                //         },
-                  //       ),
-                //     );
-                //   });
-                // } on FirebaseAuthException catch (e) {
-                //   print(e);
-                //   Utils().showSnackBar(e.message);
-                // }
+                  });
+                } on FirebaseAuthException catch (e) {
+                  print(e);
+                  Utils().showSnackBar(e.message);
+                }
 
                 // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+
               }),
           ],
         ),
