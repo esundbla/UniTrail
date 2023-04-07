@@ -17,32 +17,36 @@ class TextfieldEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
-      child: Material(
-        child: Center(
-          child: TextFormField(
-            controller: controller,
-            autocorrect: true,
-            obscureText: obscureText,
-            decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: TextStyle(color: Colors.grey[500]),
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                border: InputBorder.none,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Colors.blue, width: 2)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red)),
-                prefixIcon: icon),
-            validator: (value) => 
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget> [
+        Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: TextFormField(
+          controller: controller,
+          autocorrect: true,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle: TextStyle(color: Colors.grey[500]),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              border: InputBorder.none,
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.blue, width: 3)),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 3),
+                borderRadius: BorderRadius.circular(15)
+              ),
+              prefixIcon: icon),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) => 
               value != null && !EmailValidator.validate(value)
                 ? 'Enter a valid email'
                 : null,
-          ),
         ),
       ),
+      ]
     );
   }
 }

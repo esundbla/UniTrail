@@ -10,7 +10,6 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage('assets/images/Tiv.jpg'),
@@ -21,7 +20,9 @@ class Welcome extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: 300,),
+          SizedBox(
+            height: 300,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -38,7 +39,6 @@ class Welcome extends StatelessWidget {
               }));
             },
           ),
-
           SizedBox(height: 20),
           MyButton(
             title: 'Guest',
@@ -52,19 +52,17 @@ class Welcome extends StatelessWidget {
           SizedBox(height: 60),
           TextButton.icon(
             style: TextButton.styleFrom(
-              foregroundColor: Colors.white,
-              textStyle: const TextStyle(fontSize: 18, fontStyle: FontStyle.italic)
-            ),
+                foregroundColor: Colors.white,
+                textStyle:
+                    const TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
             label: const Text("Don't have an account? Register!"),
             icon: const Icon(Icons.arrow_forward_ios),
-            onPressed: (){
-               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                   return SignUpPage();
-                }));
-
-            }, 
-          
-            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SignUpPage();
+              }));
+            },
+          ),
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-final Map<String,  LatLng> buildingLL = {
-  "AES": const LatLng(39.74506, -105.0088116),
+final Map<String, LatLng> buildingLL = {
+  "AES": const LatLng(39.745133, -105.008378),
   "Tivoli": const LatLng(39.745019, -105.006413),
   "King Center": const LatLng(39.744233, -105.006401),
   "JSSB": const LatLng(39.745759, -105.007569),
