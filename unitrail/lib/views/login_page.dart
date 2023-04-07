@@ -22,6 +22,14 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -47,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
                 Tile(imagePath: 'assets/images/Logo1.png'),
               ],
             ),
-
             SizedBox(
               height: 200,
             ),
@@ -69,11 +76,6 @@ class _LoginPageState extends State<LoginPage> {
               title: 'Login',
               color: Colors.white,
               onPressed: () async {
-                    // showDialog(
-                    // context: context,
-                    // barrierDismissible: false,
-                    // builder: (context) =>
-                    //     Center(child: CircularProgressIndicator()));
                   try {
                   await FirebaseAuth.instance
                       .signInWithEmailAndPassword(

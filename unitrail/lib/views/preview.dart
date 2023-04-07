@@ -51,7 +51,6 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
   // Callback that connects the created controller to the unity controller
   void onUnityCreated(controller) {
     _unityWidgetController = controller;
-    
   }
 
   // Communication from Unity to Flutter
