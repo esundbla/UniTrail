@@ -1,4 +1,5 @@
 import 'package:requests/requests.dart';
+import 'package:unitrail/views/Components/datetimeParser.dart';
 import 'package:unitrail/views/Components/event.dart';
 import 'package:icalendar_parser/icalendar_parser.dart';
 import 'package:format/format.dart';
@@ -22,6 +23,7 @@ Future<List<Event>> icsToEvent() async {
   eventListString = eventListString.sublist(1);
 
   for (var eventString in eventListString) {
+    //print(eventString);
     var eventDts = eventString.split('\n');
     String? summary, location;
     bool? allDay;
@@ -78,57 +80,22 @@ Future<List<Event>> icsToEvent() async {
             break;
         }
       }
-      DateTime start;
-      DateTime end;
-      if (startString!.isNotEmpty && startString.length > 9) {
-        startString = startString.substring(0, 4) +
-            "-" +
-            startString.substring(4, 6) +
-            "-" +
-            startString.substring(6, 8) +
-            " " +
-            startString.substring(9, 11) +
-            ":" +
-            startString.substring(11, 13) +
-            ":" +
-            startString.substring(13);
-
-        endString = endString!.substring(0, 4) +
-            "-" +
-            endString.substring(4, 6) +
-            "-" +
-            endString.substring(6, 8) +
-            " " +
-            endString.substring(9, 11) +
-            ":" +
-            endString.substring(11, 13) +
-            ":" +
-            endString.substring(13);
-
-        start = DateFormat("yyyy-mm-dd hh:mm:ss").parse(startString);
-        end = DateFormat("yyyy-mm-dd hh:mm:ss").parse(endString);
-      } else {
-        startString = startString.substring(0, 4) +
-            "-" +
-            startString.substring(4, 6) +
-            "-" +
-            startString.substring(6);
-
-        endString = endString!.substring(0, 4) +
-            "-" +
-            endString.substring(4, 6) +
-            "-" +
-            endString.substring(6);
-        start = DateFormat("yyy-mm-dd").parse(startString);
-        end = DateFormat("yyyy-mm-dd").parse(endString);
+      DateTime? start;
+      DateTime? end;
+      if (startString!.isNotEmpty) {
+        
+        start = parseDT(startString);
+        print(start);
+        end = parseDT(endString!);
+        
       }
 
       var newEvent = Event(
-          title: 'MSU Event',
-          description: summary!,
-          from: start,
-          to: end,
-          isAllDay: allDay!);
+        title: summary!,
+        description: summary,
+        from: start!,
+        to: end!, /*isAllDay: allDay!*/
+      );
 
       events.add(newEvent);
     } catch (e) {

@@ -1,30 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:unitrail/views/Components/event.dart';
 import 'package:unitrail/views/Widgets/utils_calendar.dart';
+import 'package:unitrail/views/Components/ics_tool.dart';
 
 class EventProvider extends ChangeNotifier {
-  final List<Event> _events = [
-    Event(
-      title: 'Learn Flutter',
-      description: 'Watch Flutter YouTube Videos',
-      from: DateTime.now(),
-      to: DateTime.now().add(Duration(hours: 2)),
-    ),
-    Event(
-      title: 'Meeting With Daniel',
-      description: 'Tea Time! 🍵',
-      from: DateTime.now().subtract(Duration(hours: 6)),
-      to: DateTime.now().add(Duration(hours: 4)),
-    )
-  ];
-
+  List<Event> events;
+  
+  EventProvider({required this.events});
   DateTime _selectedDate = DateTime.now();
 
   DateTime get selectedDate => _selectedDate;
 
   void setDate(DateTime date) => _selectedDate = date;
 
-  List<Event> get eventsOfSelectedDate => _events.where(
+  List<Event> get eventsOfSelectedDate => events.where(
         (event) {
           final selected = UtilsCalendar.removeTime(_selectedDate);
           final from = UtilsCalendar.removeTime(event.from);
@@ -36,23 +25,23 @@ class EventProvider extends ChangeNotifier {
         },
       ).toList();
 
-  List<Event> get events => _events;
+  List<Event> get _events => events;
 
   void addEvent(Event event) {
-    _events.add(event);
+    events.add(event);
 
     notifyListeners();
   }
 
   void deleteEvent(Event event) {
-    _events.remove(event);
+    events.remove(event);
 
     notifyListeners();
   }
 
   void editEvent(Event newEvent, Event oldEvent) {
-    final index = _events.indexOf(oldEvent);
-    _events[index] = newEvent;
+    final index = events.indexOf(oldEvent);
+    events[index] = newEvent;
 
     notifyListeners();
   }
