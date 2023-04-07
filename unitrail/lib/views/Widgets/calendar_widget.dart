@@ -12,11 +12,8 @@ class CalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final events = Provider.of<EventProvider>(context).events;
-    for (var e in msuEvents) {
-      print(e.description);
-    }
-    var allEvents = msuEvents + events;
+    var events = Provider.of<EventProvider>(context).events;
+    final allEvents =  msuEvents + events;
     return SfCalendar(
       view: CalendarView.month,
       dataSource: EventDataSource(events),
