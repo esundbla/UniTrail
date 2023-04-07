@@ -36,6 +36,7 @@ dependencies:
   intl: any
   email_validator: ^2.1.16
   icalendar_parser: any
+  format: ^1.2.0
 
 
 dev_dependencies:

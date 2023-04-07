@@ -1,10 +1,11 @@
 import 'package:provider/provider.dart';
+import 'package:unitrail/models/schedule.dart';
 import 'package:unitrail/views/Provider/event_provider.dart';
 import 'package:unitrail/views/Widgets/utils.dart';
 import 'package:unitrail/BackEndTesting/Gmap.dart';
-import 'package:unitrail/BackEndTesting/calandar.dart';
 import 'package:unitrail/views/welcome.dart';
 import 'package:unitrail/BackEndTesting/Testing.dart';
+import 'package:unitrail/views/Components/GridDashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,7 +23,6 @@ Future main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(DevicePreview(enabled: false, builder: (context) => MyApp()));
-
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -41,8 +41,10 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: DefaultBottomBarController(child: Welcome()),
-        ),
+          home: DefaultBottomBarController(
+              child: Welcome()
+              //child: GridDashboard(schedule: [])),
+          )),
       );
     });
   }
