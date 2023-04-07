@@ -10,23 +10,35 @@ class CalendarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final events = Provider.of<EventProvider>(context).events;
 
-    return Container(
-      child: SfCalendar(
-        view: CalendarView.month,
-        dataSource: EventDataSource(events),
-        showNavigationArrow: true,
-        initialSelectedDate: DateTime.now(),
-        cellBorderColor: Colors.transparent,
-        onLongPress: (details) {
-          final provider = Provider.of<EventProvider>(context, listen: false);
+    return SfCalendar(
+      view: CalendarView.month,
+      dataSource: EventDataSource(events),
+      initialSelectedDate: DateTime.now(),
+      cellBorderColor: Colors.transparent,
+      onSelectionChanged: (details) {
+        final provider = Provider.of<EventProvider>(context, listen: false);
 
-          provider.setDate(details.date!);
+        provider.setDate(details.date!);
+      },
+      onTap: (details) {
+        final provider = Provider.of<EventProvider>(context, listen: false);
+
+        if (provider.selectedDate == details.date) {
           showModalBottomSheet(
-            context: context, 
+            context: context,
             builder: (context) => TasksWidget(),
           );
-        },
-      ),
+        }
+      },
+      onLongPress: (details) {
+        final provider = Provider.of<EventProvider>(context, listen: false);
+
+        provider.setDate(details.date!);
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => TasksWidget(),
+        );
+      },
     );
   }
 }
