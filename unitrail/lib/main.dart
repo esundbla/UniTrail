@@ -46,8 +46,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           home: DefaultBottomBarController(
-              //child: Welcome()
-              child: GridDashboard(schedule: [])),
+              child: Welcome())
+              //child: GridDashboard(schedule: [])),
         ),
       );
     });
