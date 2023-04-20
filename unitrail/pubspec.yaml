@@ -36,6 +36,8 @@ dependencies:
   intl: any
   email_validator: ^2.1.16
   icalendar_parser: any
+  awesome_dialog: ^3.0.2
+  flutter_animated_button: ^2.0.3
 
 
 dev_dependencies:

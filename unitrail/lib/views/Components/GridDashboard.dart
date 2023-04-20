@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/event_editing.dart';
 import 'package:unitrail/views/Widgets/calendar_widget.dart';
+import 'package:unitrail/views/Widgets/schedule.dart';
 import 'package:unitrail/views/Widgets/costumed_home_button.dart';
-import 'package:unitrail/views/classes.dart';
 import 'package:unitrail/views/navigate.dart';
 import 'package:unitrail/views/settings.dart';
 
@@ -39,30 +39,32 @@ class GridDashboard extends StatelessWidget {
             buttonColor: Colors.deepPurple,
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ClassSchedule(
-                  classes: schedule,
-                );
+                return ClassSchedule();
               }));
             },
-        picPath: 'assets/images/c.jpg'),
+            picPath: 'assets/images/c.jpg'),
         CustomButton(
             buttonTitle: 'Calendar',
             buttonColor: Colors.red,
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                Scaffold (
-                  appBar: AppBar(
-                    title: Text('Calendar Events'),
-                    centerTitle: true,
-                  ),
-                  body: CalendarWidget(),
-                  floatingActionButton: FloatingActionButton(
-                    backgroundColor: Colors.red,
-                    onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => EventEditingPage()),),
-                    child: Icon(Icons.add, color: Colors.white),
-                  ),
-                )
-                ));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                            appBar: AppBar(
+                              title: Text('Calendar Events'),
+                              centerTitle: true,
+                            ),
+                            body: CalendarWidget(),
+                            floatingActionButton: FloatingActionButton(
+                              backgroundColor: Colors.red,
+                              onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => EventEditingPage()),
+                              ),
+                              child: Icon(Icons.add, color: Colors.white),
+                            ),
+                          )));
             },
             picPath: 'assets/images/calendar.jpg'),
         // CustomButton(
