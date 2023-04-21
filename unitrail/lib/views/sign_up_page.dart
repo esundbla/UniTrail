@@ -1,7 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/text_field.dart';
-import 'package:unitrail/views/Widgets/my_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:unitrail/views/login_page.dart';
@@ -46,9 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
             image: DecorationImage(
                 image: AssetImage('assets/images/Tiv.jpg'),
                 fit: BoxFit.cover,
-                opacity: 0.15
-                //colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
-                ),
+                opacity: 0.15),
           ),
           child: Form(
             key: formKey,
@@ -74,13 +71,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: 'First Name',
                     obscureText: false,
                     icon: Icon(Icons.person)),
-                //Divider(height: 2),
                 Textfield(
                     controller: lastNameController,
                     hintText: 'Last Name',
                     obscureText: false,
                     icon: Icon(Icons.person)),
-                //Divider(height: 2),
                 TextfieldEmail(
                     controller: emailController,
                     hintText: 'Enter email',
@@ -96,24 +91,26 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 10,
                 ),
                 AnimatedButton(
-                    height: 70,
-                    width: 325,
-                    text: "Register",
-                    buttonTextStyle: TextStyle(fontSize: 25),
-                    color: Color(0xFFA31621),
-                    pressEvent: () async {
-                      final isValid = formKey.currentState!.validate();
-                      if (!isValid) return;
-                      try {
-                        await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: emailController.text,
-                                password: passwordController.text)
-                            .then((value) {
-                          FirebaseFirestore.instance
-                              .collection('Users')
-                              .doc(value.user?.uid)
-                              .set({
+                  height: 70,
+                  width: 325,
+                  text: "Register",
+                  buttonTextStyle: TextStyle(fontSize: 25),
+                  color: Color(0xFFA31621),
+                  pressEvent: () async {
+                    final isValid = formKey.currentState!.validate();
+                    if (!isValid) {
+                      return;
+                    }
+                    try {
+                      await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text)
+                        .then((value) {
+                        FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc(value.user?.uid)
+                          .set({
                             "email": value.user?.email,
                             "firstName": firstNameController.text,
                             "lastName": lastNameController.text,
@@ -121,30 +118,40 @@ class _SignUpPageState extends State<SignUpPage> {
                             "navigations": {},
                           });
                         });
-                      } on FirebaseAuthException catch (e) {
-                        print(e);
-
-                        Utils().showSnackBar(e.message);
-                      }
+                    } on FirebaseAuthException catch (e) {
+                      print(e);
                       AwesomeDialog(
                         context: context,
-                        dialogType: DialogType.success,
+                        dialogType: DialogType.warning,
                         animType: AnimType.bottomSlide,
                         showCloseIcon: false,
-                        title: "Success",
-                        desc: "Your account has been registered.",
-                        btnOkOnPress: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return LoginPage();
-                              },
-                            ),
-                          );
-                        },
+                        title: "Try again",
+                        desc: "The email address is already in use by another account.",
                       ).show();
-                    }),
+
+                      Utils().showSnackBar(e.message);
+                    }
+                    // ignore: use_build_context_synchronously
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.success,
+                      animType: AnimType.bottomSlide,
+                      showCloseIcon: false,
+                      title: "Success",
+                      desc: "Your account has been registered.",
+                      btnOkOnPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginPage();
+                            },
+                          ),
+                        );
+                      },
+                    ).show();
+                  }
+                ),
               ],
             ),
           ),
