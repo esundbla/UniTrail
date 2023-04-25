@@ -16,9 +16,13 @@ class _ClassSchedule extends State<ClassSchedule> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Class Details", style: TextStyle(color: Color.fromARGB(255, 67, 98, 238)),),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xFFfcf7f8)),
+          onPressed: () => Navigator.of(context).pop(context),
+        ),
+        title: Text("Class Details", style: TextStyle(color: Colors.white),),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color(0xFFa31621),
         elevation: 0,
       ),
       body: Container(

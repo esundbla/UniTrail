@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:unitrail/main.dart';
@@ -69,35 +70,28 @@ class _LoginPageState extends State<LoginPage> {
               title: 'Login',
               color: Colors.white,
               onPressed: () async {
-                    // showDialog(
-                    // context: context,
-                    // barrierDismissible: false,
-                    // builder: (context) =>
-                    //     Center(child: CircularProgressIndicator()));
-                  try {
-                  await FirebaseAuth.instance
-                      .signInWithEmailAndPassword(
-                          email: emailController.text,
-                          password: passwordController.text)
-                      .then((value) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return MaterialApp(
-                              home: DefaultBottomBarController(
-                                  child: HomeScreen()));
-                        },
-                        ),
-                    );
+                try {
+                await FirebaseAuth.instance
+                  .signInWithEmailAndPassword(
+                    email: emailController.text,
+                    password: passwordController.text)
+                  .then((value) {
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                    HomeScreen()), (Route<dynamic> route) => false);
                   });
                 } on FirebaseAuthException catch (e) {
                   print(e);
+                  AwesomeDialog(
+                    context: context,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.error,
+                    animType: AnimType.bottomSlide,
+                    showCloseIcon: false,
+                    title: "Try again",
+                    desc: "The email address has not been registered or the password is invalid.",
+                  ).show();
                   Utils().showSnackBar(e.message);
                 }
-
-                // navigatorKey.currentState!.popUntil((route) => route.isFirst);
-
               }),
           ],
         ),

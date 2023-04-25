@@ -33,6 +33,7 @@ dependencies:
   requests: ^4.7.0
   syncfusion_flutter_calendar: ^21.1.37
   firebase_auth: ^4.2.9  
+  get: ^4.6.1
   intl: any
   email_validator: ^2.1.16
   icalendar_parser: any

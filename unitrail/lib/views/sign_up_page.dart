@@ -114,15 +114,16 @@ class _SignUpPageState extends State<SignUpPage> {
                             "email": value.user?.email,
                             "firstName": firstNameController.text,
                             "lastName": lastNameController.text,
+                            "school": "",
                             "studentID": "",
-                            "navigations": {},
                           });
                         });
                     } on FirebaseAuthException catch (e) {
                       print(e);
                       AwesomeDialog(
                         context: context,
-                        dialogType: DialogType.warning,
+                        headerAnimationLoop: false,
+                        dialogType: DialogType.error,
                         animType: AnimType.bottomSlide,
                         showCloseIcon: false,
                         title: "Try again",
@@ -134,6 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     // ignore: use_build_context_synchronously
                     AwesomeDialog(
                       context: context,
+                      headerAnimationLoop: false,
                       dialogType: DialogType.success,
                       animType: AnimType.bottomSlide,
                       showCloseIcon: false,
