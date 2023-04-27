@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unitrail/views/Components/text_field.dart';
+import 'package:unitrail/views/Components/user_input_field.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +9,7 @@ import 'Components/text_field_password.dart';
 import 'Components/tile.dart';
 import 'Widgets/utils.dart';
 import 'Widgets/back_button.dart';
+import 'package:sizer/sizer.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController studentID = TextEditingController();
 
   @override
   void dispose() {
@@ -29,68 +31,88 @@ class _SignUpPageState extends State<SignUpPage> {
 
     super.dispose();
   }
-
-  void saveInformation() {
-    print(firstNameController.text);
-    print(lastNameController.text);
-    print(passwordController.text);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/images/Tiv.jpg'),
-            fit: BoxFit.cover,
-            opacity: 0.15
-            //colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)
-            ),
-      ),
+        decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                 Color(0xFFB92B27),
+                  Color(0xFF240B36),
+                  Color(0xFF1565C0),
+                ]
+              ),
+              image: DecorationImage(
+              image: AssetImage('assets/images/Tiv.jpg'),
+              fit: BoxFit.cover,
+              opacity: 0.25
+              ),
+          ),
       child: Form(
         key: formKey,
         child: Column(
-          
+          mainAxisAlignment: MainAxisAlignment.center,
         children: [
-            SizedBox(height: 30,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: 8),
-              MyBackButton(),
-              SizedBox(width: 50),
-              Tile(imagePath: 'assets/images/Logo1.png'),
-              ],
+            Tile(imagePath: 'assets/images/Logo1.png'),
+            SizedBox(height: 2.h,),
+            Text("CREATE AN ACCOUNT!", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),),
+            SizedBox(height: 2.h,),
+            SizedBox(
+               height: 6.h,
+                width: 98.w,
+              child: UserInputField(
+                individualController: firstNameController, 
+                hintText: "Name", 
+                hideText: false, 
+                icon: Icon(Icons.person_3_sharp), 
+                colorForBox: Colors.white, 
+                hintTextColor: Color(0xFF104547)
+              ),
             ),
-            SizedBox(height: 100,),
-            Textfield(
-                controller: firstNameController,
-                hintText: 'First Name',
-                obscureText: false,
-                icon: Icon(Icons.person)),
-            //Divider(height: 2),
-            Textfield(
-                controller: lastNameController,
-                hintText: 'Last Name',
-                obscureText: false,
-                icon: Icon(Icons.person)),
-            //Divider(height: 2),
+            SizedBox(height: .5.h,),
+            SizedBox(
+              height: 6.h,
+              width: 98.w,
+              child: UserInputField(
+                individualController: lastNameController, 
+                hintText: "Last Name", 
+                hideText: false, 
+                icon: Icon(Icons.person_3_sharp), 
+                colorForBox: Colors.white, 
+                hintTextColor: Color(0xFF104547)
+              ),
+            ),
             TextfieldEmail(
                 controller: emailController,
                 hintText: 'Enter email',
                 obscureText: false,
-                icon: Icon(Icons.email)),
+                icon: Icon(Icons.email)
+            ),
+            SizedBox(
+              height: 6.h,
+              width: 98.w,
+              child: UserInputField(
+                individualController: studentID, 
+                hintText: "Student ID", 
+                hideText: false, 
+                icon: Icon(Icons.person_3_sharp), 
+                colorForBox: Colors.white, 
+                hintTextColor: Color(0xFF104547)
+              ),
+            ),
             TextfieldPassword(
               controller: passwordController,
               hintText: 'Enter Password',
               obscureText: true,
               icon: Icon(Icons.password),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 0.75.h,),
           MyButton(
-                title: 'Sign Up',
+                title: 'SIGN UP',
                 color: Colors.white,
                 onPressed: () async {
                   final isValid = formKey.currentState!.validate();
@@ -108,28 +130,38 @@ class _SignUpPageState extends State<SignUpPage> {
                         "email": value.user?.email,
                         "firstName": firstNameController.text,
                         "lastName": lastNameController.text,
-                        "studentID": "",
+                        "studentID": studentID.text,
                         "classes": {},
                         "navigations": {},
                       });
                     });
                   } on FirebaseAuthException catch (e) {
                     print(e);
-
+      
                     Utils().showSnackBar(e.message);
                   }
+                  // ignore: use_build_context_synchronously
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return LoginPage();
+                        return Login();
                       },
                     ),
                   );
-                })
+                }
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(foregroundColor: Colors.white ),
+                onPressed: (){ Navigator.of(context).pop();}, 
+                icon: Icon(Icons.arrow_back_ios), 
+                label: Text("Go back?", style: TextStyle(fontSize: 18, color: Colors.white),),
+              )
+                
           ],
         ),
       ),
-      ));
+      )
+    );
   }
 }

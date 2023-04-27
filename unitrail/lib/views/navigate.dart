@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:sizer/sizer.dart';
+import 'package:unitrail/views/Widgets/windows_appbar.dart';
 import 'package:unitrail/views/gmap_overworld.dart';
 import 'package:unitrail/views/preview.dart';
 
@@ -67,29 +68,17 @@ class _NavigateScreenState extends State<NavigateScreen> {
 
     return Scaffold(
         backgroundColor: Color(0xFFfcf7f8),
-        appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xFFfcf7f8)),
-              onPressed: () => Navigator.of(context).pop(context),
-            ),
-            title: Image.asset(
-              "assets/images/team_logo.png",
-              fit: BoxFit.contain,
-              height: 5.h,
-            ),
-            toolbarHeight: 7.h,
-            backgroundColor: const Color(0xFFa31621),
-            actions: []),
+        appBar: WindowsAppBar(),
         body: Padding(
           padding: EdgeInsets.fromLTRB(7.w, 4.h, 7.w, 4.h),
           child: Center(
             child: Column(
                 mainAxisSize: MainAxisSize.min,
-
+          
                 //Widget list for given page.
                 children: <Widget>[
-                  Text("Begining"),
-
+                  //Text("Begining"),
+          
                   //Future Builder for start location searchChoices
                   FutureBuilder(
                       future: readData(),
@@ -101,10 +90,12 @@ class _NavigateScreenState extends State<NavigateScreen> {
                           buildRooms = snapshot.data;
                           //print(buildRooms);
                           return SearchChoices.single(
+                            clearIcon: Icon(Icons.clean_hands_rounded, color: Color(0xFFA31621), size: 3.h,),
+                            iconEnabledColor: Color(0xFFA31621),
                             items: buildRooms,
                             value: start,
-                            hint: "Select one",
-                            searchHint: "Select one",
+                            hint: "From",
+                            searchHint: "Room or Building?",
                             onChanged: (value) {
                               setState(() {
                                 start = value;
@@ -116,14 +107,16 @@ class _NavigateScreenState extends State<NavigateScreen> {
                           return const CircularProgressIndicator();
                         }
                       }),
-
-                  Text("Destination"),
-
+          
+                  // Text("Destination"),
+          
                   SearchChoices.single(
+                    clearIcon: Icon(Icons.clean_hands_rounded, color: Color(0xFFA31621), size: 3.h,),
+                    iconEnabledColor: Color(0xFFA31621),
                     items: buildRooms,
                     value: dest,
-                    hint: "Select one",
-                    searchHint: "Select one",
+                    hint: "To",
+                    searchHint: "Room or Building?",
                     onChanged: (value) {
                       setState(() {
                         dest = value;
@@ -146,9 +139,10 @@ class _NavigateScreenState extends State<NavigateScreen> {
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: Size.fromWidth(50.w),
-                          backgroundColor: Color.fromARGB(178, 13, 217, 84),
+                          backgroundColor: Color(0xFFA31621),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)))),
-                ]))));
+                ]),
+          )));
   }
 }

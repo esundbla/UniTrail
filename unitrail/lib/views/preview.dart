@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:unitrail/views/Widgets/windows_appbar.dart';
 import 'components/rounded_button.dart';
 
 class UnityDemoScreen extends StatefulWidget {
@@ -33,6 +34,7 @@ class _UnityDemoScreenState extends State<UnityDemoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: WindowsAppBar(),
         key: _scaffoldKey,
         body: SafeArea(
           bottom: false,

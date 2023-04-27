@@ -49,23 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFfcf7f8),
-      appBar: AppBar(
-          title: Image.asset(
-            "assets/images/team_logo.png",
-            fit: BoxFit.contain,
-            height: 5.h,
-          ),
-          toolbarHeight: 7.h,
-          backgroundColor: const Color(0xFFa31621),
-          actions: [
-            TextButton(
-              onPressed: () {},
-              child: Icon(
-                Icons.logout_rounded,
-                color: Color(0xFFfcf7f8),
-              ),
-            )
-          ]),
+      appBar: HomeAppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
