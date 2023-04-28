@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unitrail/views/Widgets/my_button.dart';
+import 'package:unitrail/views/profile_page.dart';
+
+import 'login_page.dart';
 
 class ShowUserInfo extends StatefulWidget with PreferredSizeWidget {
   
@@ -50,22 +53,19 @@ class _ShowUserInfoState extends State<ShowUserInfo> {
               title: Center(child: Text("$firstName  $lastName", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
               content: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  child: Column(
-                    children: [
-                      Text(email),
-                      Text(studentID)
-                    ],
-                  ),
-                ),
               ),
               actions: [
                 TextButton(
-                  onPressed: (){},
-                  child: Text("Edit",style:TextStyle( color:  Color(0xFFA31621))),
+                  onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ProfilePage();
+              }));},
+                  child: Text("Profile",style:TextStyle( color:  Color(0xFFA31621))),
                 ),
                 TextButton(
-                  onPressed: () => Navigator.pop(context, 'Logout'),
+                  onPressed: () {FirebaseAuth.instance.signOut().then((value) {
+             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                    Login()), (Route<dynamic> route) => false);
+                  });},
                   child: Text("Logout", style:TextStyle( color:  Color(0xFFA31621))),
                 )
               ],

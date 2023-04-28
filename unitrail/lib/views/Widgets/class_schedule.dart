@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import '../class.dart';
+import 'enter_classes.dart';
 
 class ClassSchedule extends StatefulWidget {
 
@@ -25,25 +27,37 @@ class _ClassSchedule extends State<ClassSchedule> {
         backgroundColor: const Color(0xFFa31621),
         elevation: 0,
       ),
-      body: Container(
-        margin: const EdgeInsets.only(top: 2),
-        child: StreamBuilder<List<Class>>(
-          stream: readClasses(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text('Something went wrong! $snapshot');
-            } else if (snapshot.hasData) {
-              final classes = snapshot.data!;
       
-              return ListView(
-                children: classes.map(buildClass).toList(),
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
+      body: Stack(
+        children: <Widget> [Container(
+          margin: const EdgeInsets.only(top: 2),
+          child: StreamBuilder<List<Class>>(
+            stream: readClasses(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong! $snapshot');
+              } else if (snapshot.hasData) {
+                final classes = snapshot.data!;
+        
+                return ListView(
+                  children: classes.map(buildClass).toList(),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
             }
-          }
+          ),
+          
         ),
+        Positioned(
+                left: 75.w, 
+                top: 75.h,
+                bottom: 0.5.h,
+                child: EnterClasses()
+          ),
+        ]
       ),
+      
     );
   }
 
