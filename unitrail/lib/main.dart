@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
-import 'package:unitrail/models/schedule.dart';
+import 'package:unitrail/BackEndTesting/read%20data/cam_scan.dart';
+import 'package:unitrail/views/welcome.dart';
 import 'package:unitrail/views/Components/ics_tool.dart';
 import 'package:unitrail/views/Provider/event_provider.dart';
 import 'package:unitrail/views/Widgets/utils.dart';
@@ -16,14 +17,24 @@ import 'firebase_options.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:sizer/sizer.dart';
 import 'package:device_preview/device_preview.dart';
+import 'dart:async';
+import 'dart:io';
+import 'package:camera/camera.dart';
 
 List<Event>? events;
+CameraDescription? firstCamera;
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   events = await icsToEvent();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  // Get a specific camera from the list of available cameras.
+  firstCamera = cameras.first;
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

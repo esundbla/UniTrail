@@ -85,7 +85,7 @@ Future<List<Event>> icsToEvent() async {
       if (startString!.isNotEmpty) {
         
         start = parseDT(startString);
-        print(start);
+        //print(start);
         end = parseDT(endString!);
         
       }
