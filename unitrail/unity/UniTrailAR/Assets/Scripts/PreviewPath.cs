@@ -4,37 +4,61 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+using FlutterUnityIntegration;
+
+
 public class PreviewPath : MonoBehaviour
 {
     private NavMeshPath path;
     private LineRenderer line;
-    public GameObject start;
-    public GameObject navTargetObject;
+    private GameObject startTarget;
+    private GameObject endTarget;
     private Vector3 lineHeightStart;
     private Vector3 lineHeightDestination;
+    private bool sceneFullyLoaded = false;
     void Start()
     {
         path = new NavMeshPath();
         line = transform.GetComponent<LineRenderer>();
-        lineHeightStart = new Vector3(start.transform.position.x,start.transform.position.y + 1.5f,start.transform.position.z);
-        lineHeightDestination = new Vector3(navTargetObject.transform.position.x,navTargetObject.transform.position.y + 1.5f,navTargetObject.transform.position.z);
-        PlayerPrefs.SetString("start", start.name);
-        PlayerPrefs.SetString("end", navTargetObject.name);
-        int previewSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        PlayerPrefs.SetInt("previousSceneIndex", previewSceneIndex);
+
+        // save varibles for nagivate scene
+        // int previewSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        // PlayerPrefs.SetInt("previousSceneIndex", previewSceneIndex);
+        
     }
 
     void Update()
     {
-       
-        NavMesh.CalculatePath(lineHeightStart, lineHeightDestination, NavMesh.AllAreas, path);
-        line.positionCount = path.corners.Length;
-        line.SetPositions(path.corners);
-        line.enabled = true;
-    }
-    public void SetNagivationTarget(string start, string end){
-        // Find object name
+         if (SceneManager.GetActiveScene().isLoaded && !sceneFullyLoaded)
+        {
+            // Debug.Log("Scene fully loaded.");
+            // UnityMessageManager.Instance.SendMessageToFlutter("Preview Scene is fully loaded");
+            sceneFullyLoaded = true;
 
+            if (startTarget != null && endTarget != null){
+            
+            NavMesh.CalculatePath(startTarget.transform.position, endTarget.transform.position, NavMesh.AllAreas, path);
+            line.positionCount = path.corners.Length;
+            line.SetPositions(path.corners);
+            }
+            else{
+                UnityMessageManager.Instance.SendMessageToFlutter("Display Path");
+            }
+        }
+        
+        
+    }
+    public void SetStartNavigationTarget(string start){
+        // Find object name
+        // startTarget = GameObject.Find(s);
+        PlayerPrefs.SetString("start", startTarget.name);
+        
+    }
+    public void SetEndNavigationTarget(string end){
+        // Find object name
+        endTarget = GameObject.Find(end);
+        PlayerPrefs.SetString("end", endTarget.name);
+        
     }
 
 

@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class TextfieldEmail extends StatelessWidget {
   final controller; // Lets us access what the user typed into the text field
@@ -17,36 +18,36 @@ class TextfieldEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget> [
-        Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: TextFormField(
-          controller: controller,
-          autocorrect: true,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: TextStyle(color: Colors.grey[500]),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              border: InputBorder.none,
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: Colors.blue, width: 3)),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.blue, width: 3),
-                borderRadius: BorderRadius.circular(15)
-              ),
-              prefixIcon: icon),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) => 
-              value != null && !EmailValidator.validate(value)
-                ? 'Enter a valid email'
-                : null,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0.5.h),
+      child: Material(
+        child: Center(
+          child: SizedBox(
+            height: 6.h,
+            child: TextFormField(
+              controller: controller,
+              autocorrect: true,
+              obscureText: obscureText,
+              decoration: InputDecoration(
+                  hintText: hintText,
+                  hintStyle: TextStyle(color:  Color(0xFF104547)),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: InputBorder.none,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: BorderSide(color: Color(0xFFB3CBE4))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: BorderSide(color: Color(0xFFB3CBE4))),
+                  prefixIcon: icon),
+              validator: (value) => 
+                value != null && !EmailValidator.validate(value)
+                  ? 'Enter a valid email'
+                  : null,
+            ),
+          ),
         ),
       ),
-      ]
     );
   }
 }

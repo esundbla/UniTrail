@@ -11,9 +11,4 @@ public class StartButtonPositioner : MonoBehaviour
         transform.position = screenPosition;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

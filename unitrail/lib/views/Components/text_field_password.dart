@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class TextfieldPassword extends StatelessWidget {
   final controller; // Lets us access what the user typed into the text field
@@ -20,29 +21,34 @@ class TextfieldPassword extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget> [
         Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: TextFormField(
-          controller: controller,
-          autocorrect: true,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: TextStyle(color: Colors.grey[500]),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              border: InputBorder.none,
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: Colors.blue, width: 3)),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.blue, width: 3),
-                borderRadius: BorderRadius.circular(15)
-              ),
-              prefixIcon: icon),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) => 
-            value != null && value.length < 6
-              ? 'Enter min. 6 characters'
-              : null,
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0.5.h),
+        child: SizedBox(
+          height: 6.h,
+          child: TextFormField(
+            controller: controller,
+            autocorrect: true,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: Color(0xFFFFFFFF),
+                hintText: hintText,
+                hintStyle: TextStyle(color: Color(0xFF104547)),
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                border: InputBorder.none,
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: BorderSide(color: Color(0xFFB3CBE4))),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFB3CBE4)),
+                  borderRadius: BorderRadius.circular(6)
+                ),
+                prefixIcon: icon),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) => 
+              value != null && value.length < 6
+                ? 'Enter min. 6 characters'
+                : null,
+          ),
         ),
       ),
       ]
