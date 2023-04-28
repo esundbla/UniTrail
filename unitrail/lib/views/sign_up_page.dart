@@ -1,9 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/user_input_field.dart';
-import 'package:unitrail/views/Widgets/my_button.dart';
-import 'package:unitrail/views/Components/text_field.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:unitrail/views/login_page.dart';
@@ -11,7 +8,6 @@ import 'Components/text_field_email.dart';
 import 'Components/text_field_password.dart';
 import 'Components/tile.dart';
 import 'Widgets/utils.dart';
-import 'Widgets/back_button.dart';
 import 'package:sizer/sizer.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -139,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             "firstName": firstNameController.text,
                             "lastName": lastNameController.text,
                             "school": "",
-                            "studentID": "",
+                            "studentID": studentID.text,
                           });
                         });
                     } on FirebaseAuthException catch (e) {
@@ -170,7 +166,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return LoginPage();
+                              return Login();
                             },
                           ),
                         );
