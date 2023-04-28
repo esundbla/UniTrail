@@ -90,7 +90,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
                           buildRooms = snapshot.data;
                           //print(buildRooms);
                           return SearchChoices.single(
-                            clearIcon: Icon(Icons.clean_hands_rounded, color: Color(0xFFA31621), size: 3.h,),
+                            clearIcon: Icon(Icons.clear, color: Color(0xFFA31621), size: 3.h,),
                             iconEnabledColor: Color(0xFFA31621),
                             items: buildRooms,
                             value: start,
@@ -111,7 +111,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
                   // Text("Destination"),
           
                   SearchChoices.single(
-                    clearIcon: Icon(Icons.clean_hands_rounded, color: Color(0xFFA31621), size: 3.h,),
+                    clearIcon: Icon(Icons.clear, color: Color(0xFFA31621), size: 3.h,),
                     iconEnabledColor: Color(0xFFA31621),
                     items: buildRooms,
                     value: dest,
