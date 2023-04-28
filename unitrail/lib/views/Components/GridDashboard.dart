@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/event_editing.dart';
 import 'package:unitrail/views/Widgets/calendar_widget.dart';
+import 'package:unitrail/views/Widgets/schedule.dart';
 import 'package:unitrail/views/Widgets/costumed_home_button.dart';
+
+import 'package:unitrail/views/profile_page.dart';
 import 'package:unitrail/views/schedule.dart';
 import 'package:unitrail/views/navigate.dart';
 import 'package:unitrail/views/Components/ics_tool.dart';
@@ -53,9 +56,7 @@ class GridDashboard extends StatelessWidget {
             buttonColor: Colors.deepPurple,
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ClassSchedule(
-                  classes: schedule,
-                );
+                return ClassSchedule();
               }));
             },
             picPath: 'assets/images/school.jpg'),

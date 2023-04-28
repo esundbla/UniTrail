@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -118,41 +119,32 @@ class _LoginState extends State<Login> {
               ),
               SizedBox(height: 2.h,),
               MyButton(
-                title: 'LOGIN',
-                color: Colors.white,
-                onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text)
-                        .then((value) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MaterialApp(
-                                home: HomeScreen());
-                          },
-                        ),
-                      );
-                    });
-                  } on FirebaseAuthException catch (e) {
-                    print(e);
-                    Utils().showSnackBar(e.message);
-                  }
-                  // ignore: use_build_context_synchronously
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return MaterialApp(
-                            home:  HomeScreen());
-                      },
-                    ),
-                  );
+              title: 'LOGIN',
+              color: Colors.white,
+              onPressed: () async {
+                try {
+                await FirebaseAuth.instance
+                  .signInWithEmailAndPassword(
+                    email: emailController.text,
+                    password: passwordController.text)
+                  .then((value) {
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                    HomeScreen()), (Route<dynamic> route) => false);
+                  });
+                } on FirebaseAuthException catch (e) {
+                  print(e);
+                  AwesomeDialog(
+                    context: context,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.error,
+                    animType: AnimType.bottomSlide,
+                    showCloseIcon: false,
+                    title: "Try again",
+                    desc: "The email address has not been registered or the password is invalid.",
+                  ).show();
+                  Utils().showSnackBar(e.message);
                 }
-              ),
+              }),
               SizedBox(height: 0.7.h),
               MyButton(
                 title: "GUEST", 
