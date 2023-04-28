@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/event_editing.dart';
 import 'package:unitrail/views/Widgets/calendar_widget.dart';
+import 'package:unitrail/views/Widgets/class_schedule.dart';
 import 'package:unitrail/views/Widgets/costumed_home_button.dart';
-import 'package:unitrail/views/schedule.dart';
+
+import 'package:unitrail/views/profile_page.dart';
 import 'package:unitrail/views/navigate.dart';
 import 'package:unitrail/views/Components/ics_tool.dart';
 import 'package:unitrail/views/settings.dart';
@@ -12,10 +14,6 @@ import 'package:unitrail/views/Widgets/windows_appbar.dart';
 
 // ignore: must_be_immutable
 class GridDashboard extends StatelessWidget {
-  final List<Schedule> schedule;
-  GridDashboard({
-    required this.schedule,
-  });
    void openLink() async {
     
     var url = Uri.parse('https://www.msudenver.edu');
@@ -53,9 +51,7 @@ class GridDashboard extends StatelessWidget {
             buttonColor: Colors.deepPurple,
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ClassSchedule(
-                  classes: schedule,
-                );
+                return ClassSchedule();
               }));
             },
             picPath: 'assets/images/school.jpg'),

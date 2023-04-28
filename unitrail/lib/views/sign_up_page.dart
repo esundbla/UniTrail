@@ -1,6 +1,6 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:unitrail/views/Components/user_input_field.dart';
-import 'package:unitrail/views/Widgets/my_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:unitrail/views/login_page.dart';
@@ -8,7 +8,6 @@ import 'Components/text_field_email.dart';
 import 'Components/text_field_password.dart';
 import 'Components/tile.dart';
 import 'Widgets/utils.dart';
-import 'Widgets/back_button.dart';
 import 'package:sizer/sizer.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -111,57 +110,73 @@ class _SignUpPageState extends State<SignUpPage> {
               icon: Icon(Icons.password),
             ),
             SizedBox(height: 0.75.h,),
-          MyButton(
-                title: 'SIGN UP',
-                color: Colors.white,
-                onPressed: () async {
-                  final isValid = formKey.currentState!.validate();
-                  if (!isValid) return;
-                  try {
-                    await FirebaseAuth.instance
+          AnimatedButton(
+                  height: 70,
+                  width: 325,
+                  text: "SIGN UP",
+                  buttonTextStyle: TextStyle(fontSize: 25),
+                  color: Color(0xFFA31621),
+                  pressEvent: () async {
+                    final isValid = formKey.currentState!.validate();
+                    if (!isValid) {
+                      return;
+                    }
+                    try {
+                      await FirebaseAuth.instance
                         .createUserWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text)
+                          email: emailController.text,
+                          password: passwordController.text)
                         .then((value) {
-                      FirebaseFirestore.instance
+                        FirebaseFirestore.instance
                           .collection('Users')
                           .doc(value.user?.uid)
                           .set({
-                        "email": value.user?.email,
-                        "firstName": firstNameController.text,
-                        "lastName": lastNameController.text,
-                        "studentID": studentID.text,
-                        "classes": {},
-                        "navigations": {},
-                      });
-                    });
-                  } on FirebaseAuthException catch (e) {
-                    print(e);
-      
-                    Utils().showSnackBar(e.message);
-                  }
-                  // ignore: use_build_context_synchronously
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Login();
+                            "email": value.user?.email,
+                            "firstName": firstNameController.text,
+                            "lastName": lastNameController.text,
+                            "school": "",
+                            "studentID": studentID.text,
+                          });
+                        });
+                    } on FirebaseAuthException catch (e) {
+                      print(e);
+                      AwesomeDialog(
+                        context: context,
+                        headerAnimationLoop: false,
+                        dialogType: DialogType.error,
+                        animType: AnimType.bottomSlide,
+                        showCloseIcon: false,
+                        title: "Try again",
+                        desc: "The email address is already in use by another account.",
+                      ).show();
+
+                      Utils().showSnackBar(e.message);
+                    }
+                    // ignore: use_build_context_synchronously
+                    AwesomeDialog(
+                      context: context,
+                      headerAnimationLoop: false,
+                      dialogType: DialogType.success,
+                      animType: AnimType.bottomSlide,
+                      showCloseIcon: false,
+                      title: "Success",
+                      desc: "Your account has been registered.",
+                      btnOkOnPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Login();
+                            },
+                          ),
+                        );
                       },
-                    ),
-                  );
-                }
-              ),
-              TextButton.icon(
-                style: TextButton.styleFrom(foregroundColor: Colors.white ),
-                onPressed: (){ Navigator.of(context).pop();}, 
-                icon: Icon(Icons.arrow_back_ios), 
-                label: Text("Go back?", style: TextStyle(fontSize: 18, color: Colors.white),),
-              )
-                
-          ],
-        ),
-      ),
-      )
-    );
+                    ).show();
+                  }
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }

@@ -83,8 +83,8 @@ class _NavigateScreenState extends State<NavigateScreen> {
                   FutureBuilder(
                       future: readData(),
                       builder: (context,
-                          AsyncSnapshot<List<DropdownMenuItem<String>>>
-                              snapshot) {
+                          AsyncSnapshot<List<DropdownMenuItem<String>>> 
+                          snapshot) {
                         if (snapshot.connectionState == ConnectionState.done &&
                             snapshot.hasData) {
                           buildRooms = snapshot.data;

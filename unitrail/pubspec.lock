@@ -81,6 +81,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  awesome_dialog:
+    dependency: "direct main"
+    description:
+      name: awesome_dialog
+      sha256: ac08268b991f228fc6b8880b68ec030d2941bcc8df8b6a6551fb79f2bd36b7da
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -374,6 +382,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_animated_button:
+    dependency: "direct main"
+    description:
+      name: flutter_animated_button
+      sha256: deb125817322cfcc4dc05e43ab79f9597bfe4837200ff145c95247ab88c2f89d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -469,6 +485,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      sha256: "2ba20a47c8f1f233bed775ba2dd0d3ac97b4cf32fc17731b3dfc672b06b0e92a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.6.5"
   glob:
     dependency: transitive
     description:
@@ -517,6 +541,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.6"
+  graphs:
+    dependency: transitive
+    description:
+      name: graphs
+      sha256: f9e130f3259f52d26f0cfc0e964513796dafed572fa52e45d2f8d6ca14db39b2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   hex:
     dependency: transitive
     description:
@@ -853,6 +885,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.7.0"
+  rive:
+    dependency: transitive
+    description:
+      name: rive
+      sha256: "22e3755b75f4ea4492d2fecf4fc2acf1c8d0073df39781d290a20cbfe74c3760"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1"
   search_choices:
     dependency: "direct main"
     description:
@@ -1267,5 +1307,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.4 <4.0.0"
+  dart: ">=2.18.4 <3.0.0"
   flutter: ">=3.3.0"
