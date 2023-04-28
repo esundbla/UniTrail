@@ -15,6 +15,7 @@ class CalendarWidget extends StatelessWidget {
     var events = Provider.of<EventProvider>(context).events;
     final allEvents =  msuEvents + events;
     return SfCalendar(
+      
       view: CalendarView.month,
       dataSource: EventDataSource(events),
       initialSelectedDate: DateTime.now(),

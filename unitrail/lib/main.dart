@@ -4,6 +4,7 @@ import 'package:unitrail/views/Components/ics_tool.dart';
 import 'package:unitrail/views/Provider/event_provider.dart';
 import 'package:unitrail/views/Widgets/utils.dart';
 import 'package:unitrail/BackEndTesting/Gmap.dart';
+import 'package:unitrail/views/login_page.dart';
 import 'package:unitrail/views/welcome.dart';
 import 'package:unitrail/BackEndTesting/Testing.dart';
 import 'package:unitrail/views/Components/GridDashboard.dart';
@@ -46,8 +47,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           home: DefaultBottomBarController(
-              //child: Welcome()
-              child: GridDashboard(schedule: [])),
+              child: Login())
+              //child: GridDashboard(schedule: [])),
         ),
       );
     });
